@@ -1,0 +1,29 @@
+- [ ] Data generation enhancement [Joel / August]
+	- Currently the training data generation takes known smile strings and converts them to xyz coordinates using openbabel. However, this generation process is long and takes quite a bit of computational power. Likely it would be better to save the .xyz files into an archive and then use those to generate the corresponding training data
+- [ ] Modularization of qpod/xpod [Joel / August]
+	- Currently many scripts in qpod (old)/xpod (new) rely on side effects in order to function with each other. This is typically done by having parts of the module execute on import time. However, this makes working with the file itself quite difficult to maintain. This is likely lower priority as if we can get it to work then that's better.
+	- This is present in
+		- acovae.py
+		- Encoder.py
+		- zEncode.py
+	- Each will likely need it's own approach
+- [ ] File storage within xpod [Joel / August]
+	- In the data generation process there are many places where files are saved as a temporary measure. Generally this is okay (not ideal for microservices) but the problem is that they are hard coded file paths without any configuration. These need to be modular in order to make change easier.
+	- This is present in
+		- Encoder.py
+		- acovae.py
+- [ ] Training loop configuration for gflownet and CAVE [Joel / August]
+	- The training loop for both the gflownet and CAVE are currently present in their respective modules and aren't super clear in functionality. While they do work we might want to consider changing their location and their configuration in order to make them easier to work with. This is low priority
+	- Areas to work on
+		- GFlowNet.py
+		- acovae.py
+- [ ] BDD test categories for XPOD [Joel / August]
+	- One aspect of the BDD styles tests we haven't been as clear on is that they convey the unique value proposition as well as specifications. So the tests need to be expanded to convey this for many different cases. This is a part of the validation process we need to work with.
+	- Generally what we need to expand in terms of tests is the ability to have tests convey perspectives/use cases. So for example an additional area is "how would a drug researcher use this tool?" and then all of the scenarios correspond to that perspective. 
+	- Tasks for this problem
+		- Generate a list of 2-3 stakeholders whom would use your project.
+			- Scientists (various kinds)
+			- Hospital directors
+			- Material designers? (came from mentor)
+		- Create BDD tests corresponding to how they would use this system
+			- Don't necessarily need to be unique

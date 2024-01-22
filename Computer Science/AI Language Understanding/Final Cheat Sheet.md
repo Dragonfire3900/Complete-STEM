@@ -1,0 +1,11 @@
+-   Context-free Grammars | Parsing [CKY, etc.]
+-   Text Classification | various types of classifiers
+-   Naive Bayes Classifier
+-   Logistic Regression
+-   Sentiment analysis
+-   Evaluating Classifiers
+-   Meaning | Computational Models of Meaning
+-   Word Embeddings
+-   Word2Vec and Skip Grams
+-   Basics of Neural Networks in NLP
+-   Information Extraction | Named Entity Recognition | Chunkers [not covered yet]

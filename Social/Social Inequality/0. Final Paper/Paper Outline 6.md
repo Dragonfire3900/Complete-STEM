@@ -1,5 +1,5 @@
 -   Central Question: What are "decision systems" missing that make them generate inequality?
--   Thesis Statement: Interpretibility, Accountability, and Flexibility (with a need to talk about feasibility)
+-   Thesis Statement: Interpretability, Accountability, and Flexibility (with a need to talk about feasibility)
 
 # Requirements
 - - - 
@@ -34,21 +34,21 @@ What are Decision Systems and where do they show up in our lives? Mainly talking
 	- 
 
 - Computerized versions
-	- [[31. Automating Inequality|Automating Ineqaulity]]: They show up in all three sections of this book
-	- 
+	- [[31. Automating Inequality|Automating Inequality]]: They show up in all three sections of this book
+		- Specifically talk about scientific charity and the able poor
 
 Why do they matter today?
 - [[17. Oppression|Oppression]]: They are another layer where oppression and discrimination can occur
-- 
+- We're seeing how this doesn't just affect the poor
 
-## Interpretibility
+## Interpretability
 - - -
-These engines need to be interpretible because we need to know why something is happening in order to make sense of it.
+These engines need to be interpretable because we need to know why something is happening in order to make sense of it.
 - [[31. Automating Inequality|Automating Inequality]]: Refer to the first story of this book
 - [[8. Racial Domination, Racial Progress|Racial Domination]]: I think this is where redlining was outlined pretty well so this should serve as an intro to redlining
 - [[6. The Meritocracy Myth|The Meritocracy Myth]]: Talk about how denials without reason can be ways of hiding discrimination and biased practices
 	- How moving into a neighborhood is still related to redlining (White flight)
-- [[17. Oppression|Oppresion]]: How systems like this can create barriers
+- [[17. Oppression|Oppression]]: How systems like this can create barriers
 - [[3. The Lottery|The Lottery]]: How without written meaning the importance can be lost with time and just "accepted"
 
 ## Accountability
@@ -74,7 +74,7 @@ There's two kinds of feasibility in this case: economic, and logistical
 Economic: How can we make systems like this reasonable to work with within the current economic system?
 - [[30. Saving Capitalism|Saving Capitalism]]: How does the market organize itself into figuring out what can and can't be a product?
 
-Logisitcal: Are rules and properties like this the right direction?
+Logistical: Are rules and properties like this the right direction?
 - [[30. Saving Capitalism|Saving Capitalism]]: Is the economy aligned to create more fair systems like this?
 	- Most likely not due to how current enforcement is working out
 - [[13. The White Working Class and Trump|The White Working Class and Trump]]: Are people willing to move forward with broader and larger policy changes?
