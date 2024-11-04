@@ -1,7 +1,7 @@
 # Unit Summary
 Tags: #Summary #UAG
 
-Relevant files: [[Lecture 16.pdf|Lecture 16]], [[Lecture 17.pdf|Lecture 17]], [[Lecture 18.pdf|Lecture 18]]
+Relevant files: [[Classes/IIT/PHYS/Intro to Quantum Computing/Lecture 16.pdf|Lecture 16]], [[Classes/IIT/PHYS/Intro to Quantum Computing/Lecture 17.pdf|Lecture 17]], [[Classes/IIT/PHYS/Intro to Quantum Computing/Lecture 18.pdf|Lecture 18]]
 
 # [[Introduction to First Order]]
 

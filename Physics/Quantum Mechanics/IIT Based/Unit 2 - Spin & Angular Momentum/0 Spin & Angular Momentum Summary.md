@@ -66,4 +66,4 @@ $$
 ### Two Particle Systems
 #### Triplet and Singlet state
 ### Clebsch-Gordon Table
-![[Addition Table.JPG]]
+![[Addition Table.jpg]]
