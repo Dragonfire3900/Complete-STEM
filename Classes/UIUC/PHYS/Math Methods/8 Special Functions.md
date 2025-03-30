@@ -12,6 +12,8 @@ Which gives an idea as to why we choose a separation coefficient of $\ell(\ell+1
 
 The Legendre Polynomials comes from us focusing on a finite function argument at the ends (which are singular)
 
+Paraxial approximations can be useful for some problems in optics
+
 ## Start
 ---
 In general this chapter works with various solutions to Laplace's equation in different coordinate systems. There are a few different coordinate systems where the Laplacian can be separated into different variables. The ones which we will focus on are all **orthogonal systems** whose coordinate axes cross at $90\degree$ angles. Each of these need to have an associated metric which defines how distance works in this particular space. 
@@ -53,7 +55,7 @@ $$
 $$
 The rest of the components can be found using a cyclic ordering of coordinates as $1 \rightarrow 2 \rightarrow 3 \rightarrow 1$. Similarly the Laplacian can also be defined in this way as follows
 $$
-\nabla \varphi = \frac{1}{h_1 h_2 h_3} \left\{
+\nabla^2 \varphi = \frac{1}{h_1 h_2 h_3} \left\{
 	\frac{\partial}{\partial x_i} \left(
 		\frac{h_j h_k}{h_i} \frac{\partial \varphi}{\partial x_i}
 	\right)
