@@ -1,0 +1,218 @@
+\section{Lie Aglebra $su(2)$ of $SU(2)$}
+$\vec{S} = \frac{\hbar}{2} \vec{\sigma}$ satisfies 
+$\left[S_j, S_k\right] = i \epsilon_{ikl} S_l$. In addition,
+any $A \in SU(2)$ can be written as
+$e^{-\frac{i}{\hbar}\phi \vec{S} \cdot \vec{n}}$,
+$\hat{n}\in \mathbb{R}^3$, and $\abs*{\hat{n}} = 1$.
+This is just a summary of last weeks work.
+
+You can parameterize the Lie group elements by exponentiating
+the Lie algebra. We have done this with pauli matrices as
+they furnish a two dimensional cover. This is typically done
+using a "highest weight representation" which orders the basis
+from highest spin to lowest spin.
+
+Last week we also computed the endomorphism from $su(2)$ to the complex
+space. In other words $\rho: su(2) \rightarrow \text{End}(\mathbb{C}^{2l+1})$.
+This gave rise to the spherical harmonics. In this class we will write this
+down as $\rho(\vec{s}) = \vec{J}$. Where the dimensionality is implicit
+in this notation.
+
+\subsection{How does a quantum state transform?}
+The main claim is that
+$$
+    \Ket{\psi'} = e^{-\frac{i}{\hbar} \vec{J}\cdot \hat{n} \theta}
+    \Ket{\psi}
+$$
+This will rotate the quantum state around the axis $\hat{n}$ by an
+angle $\theta$. There is a minor ambiguity in why there is a minus
+sign in the exponential. Suppose we wanted to measure the spin along
+an arbitrary direction
+\begin{align*}
+    \Bra{\psi'} \vec{J}\cdot \hat{a} \Ket{\psi'} \\
+    \Bra{\psi} e^{\frac{i}{\hbar} \vec{J} \cdot \hat{n} \theta}
+        \vec{J} \cdot \hat{a}
+        e^{-\frac{i}{\hbar} \vec{J} \cdot \hat{n} \theta} 
+        \Ket{\psi}
+\end{align*}
+Previously when working with rotations we had switched signs on the exponentials
+We we can end up simplifying this to be the inverse of $R$.
+\begin{align*}
+    \Bra{\psi} \vec{J} \cdot \left(R^t_{\hat{n}, \theta} \hat{a}\right) \Ket{\psi} \\
+    \Bra{\psi} \left(R_{\hat{n}, \theta} \vec{J}\right) \cdot \hat{a} \Ket{\psi}
+\end{align*}
+By taking the inner product with $\hat{a}$ of the difference between $\vec{J}$ and
+$R \vec{J}$ we can find this to be zero.
+Thus, we conlude that $\vec{J}$ must transform like a vector. We will extend this in
+a few weeks to find "spherical tensors" which transform like higher order versions of
+$\vec{J}$. For the upcoming homework we will be working on proving the addition theorem
+which will be quite helpful in 581. Also somehow we're behind schedule?
+
+\subsection{Question from last time}
+The original $\delta_{mm'}$ was correct and the reason is that we
+are exponentiating a diagonal matrix. He also asked us to correct him and ask
+questions about the content as soon as possible
+
+\section{Density Matrix}
+We needed the Lie Algebra formalism in order to understand
+this setup. We will also need the density matrix in order to understand
+QIS. 
+
+We're going to go back to the Stern-Gerlach experiment. As described before
+we will get a stream of silver atoms and put them through an inhomogenous magnetic field.
+We will observe two eigenstates of the $S_z$ operator. The question is:
+what is the state of the experiment before the magnetic field?
+In theory, we would expect them to not be polarized in any direction and should have
+an equal chance of being in any direction. 
+
+In quantum mechanics we never really measure a single particle and instead measure
+a set of multiple particles or an "ensemble". 
+
+\begin{definition}[Pure State]
+\label{purestate}
+A pure state $\Ket{\psi} \in \mathcal{H}$ is a single state within the Hilbert space
+\end{definition}
+
+However, we need to move away from this and towards describing how multiple particles
+are within the entire hilbert space. For example, let's say $\Ket{\psi} = \Ket{\hat{x}, +}$
+and compare it against a "mixed" ensemble of 
+$$
+    \left\{\left(\frac{1}{2}, \Ket{+}\right), \left(\frac{1}{2}, \Ket{-}\right)\right\}
+$$
+In other words there are two states which make up half the whole. One key difference
+is that there will be interference in the $\Ket{\psi}$ state but not in the
+ensemble state. If we measure these two systems along the $S_z$ they will appear
+to be identical. However, if we measure along $S_x$ we will find only a single
+beam in the $\Ket{\psi}$ state but two in the ensemble state. 
+
+This second version describes a "mixed state" which is a set of individual states
+which have a probability between them. From this we need to re-write our formalism
+to account for these ensembles (how to take expectations, and represent individual vectors).
+
+\subsection{Motivation behind the density operator}
+The setup for this is the same as the typical S-G experiment. The difference is that
+we will take the magnetic field along $\hat{n}$ and we will randomize this direction
+for every particle. Then we will only keep the $\hbar/2$ states from this random experiment.
+This will be functionally the same as the previous experiment. But in doing this we can 
+describe how to "average" a different Hermitian operator $A$.
+
+We will describe this using $\left[A\right]$ to denote the ensemble average of the
+operator $A$. It will have the following definition
+$$
+    \left[A\right] = \frac{1}{4 \pi} \int d \Omega
+       \Bra{\hat{n}\cdot\vec{S}, +} A \Ket{\hat{n}\cdot\vec{S}, +}
+$$
+After inserting the identity operator 
+$\mathbb{1} = \sum_{n=0}^{\infty} \Ket{\psi_n}\Bra{\psi_n}$
+Using this we can then describe this integral by treating this 
+average as the density matrix $\rho$ of the projection operator.
+\begin{align*}
+    \left[A\right] = \sum_{n=0}^\infty \Bra{\psi_n}
+        \left(\int d \Omega \frac{\text{state}}{4 \pi}\right) A \Ket{\psi_n} \\
+    \therefore \; \left[A\right] = \text{tr}(\rho A)
+\end{align*}
+This has the same intuition as the previous setup with this new operator $\rho$.
+
+\subsection{Mathematical Formalism}
+\begin{definition}[Density Operator]
+\label{denseop}
+A density operator $\rho: \mathcal{H} \rightarrow \mathcal{H}$ that is Hermitian,
+positive semi-definite, and $\tr(\rho) = 1$
+\end{definition}
+In general with this formalism we can write the density operator as the following
+$\rho = \sum \omega_i \Ket{\phi_i}\Bra{\phi_i}$. 
+Where $1 \ge \omega_i > 0$. This will map between
+different states even in other bases. In a pure state we will have some of the
+$\omega_i$ being zero which will make this operator semi-definite.
+
+From these definitions we can establish the following properties of the
+density operator
+\begin{enumerate}
+    \item $\left[A\right] \equiv \tr(\rho A) = \sum_i \omega_i \Bra{\phi_i} A \Ket{\phi_i}$
+    \item $\rho$ is positive semi-definite
+    \item Each eigen value, $\lambda$, of $\rho$ is bounded by $0 \le \lambda \le 1$.
+        This comes from the trace being one and the positive semi-definite boundary.
+    \item $\tr(\rho^2) \le 1$.
+        This comes from the previous property
+\end{enumerate}
+
+\begin{definition}[Pure State]
+\label{purestate2}
+$\rho$ is called pure if, $\exists \Ket{\psi} \in \mathcal{H}$, s.t.
+$\rho = \Ket{\psi}\Bra{\psi}$
+\end{definition}
+
+From this we have the following theorem
+\begin{theorem}[Pure state properties]
+\label{pureprops}
+\begin{enumerate}
+    \item $\rho^2 = \rho$ iff $\rho$ is pure
+    \item $\tr(\rho^2) = 1$ iff $\rho$ is pure
+\end{enumerate}
+\end{theorem}
+
+Let's consider the following example
+Condier $\Ket{\psi_\pm} = \Ket{S_x,\pm}$. In this case $\rho = \Ket{\psi_\pm}\Bra{\psi_\pm}$.
+We can find the matrix form by using vector notation
+$$
+    \rho = \frac{1}{2} \left(I \pm \sigma_x\right)
+$$
+We expect this to be a pure state. We can do this by doing one of the following:
+diagonalize the matrix and show a non-trivial kernel, diagonalize the matrix and show that
+it is an outer product, and use theorem \ref{pureprops}.
+
+Let's look at the completely generic form of the density matrix for the two $\hat{z}$ spin
+states. Let $\mathcal{H} = \text{span}_{\sigma} \left\{\Ket{+}, \Ket{-}\right\}$. From this
+we know that $\rho = a I + \vec{b} \cdot \vec{\sigma}$. Combined with the trace
+$a = \frac{1}{2}$. We now only need to diagonalize the second term (since the first
+is already diagonalized). We know from previous discussions we know that the second
+term is an involution for a unit vector $\hat{b}$ which gives eigenvalues of
+$\frac{1}{2} \pm \abs{\vec{b}} \ge 0$. Which implies that $\vec{b}$ must have
+a magnitude of less than or equal to $\frac{1}{2}$. We can saturate this
+inequality to get a pure state with the density matrix
+$\rho = \Ket{\vec{d},+}\Bra{\vec{d},+}$ where $\vec{d}$ is a scaled version of $\vec{b}$.
+
+\section{New Postulates of QM}
+We can now rewrite our fundamental postulates of QM as follows,
+\begin{enumerate}
+    \item A physical state is a density operator $\rho$
+    \item Observables are Hermitian operators
+    \item The expecatation of an observable is $\left[A\right] = \tr \left(\rho A\right)$
+    \item The probability to measure $\lambda$ from $A$ to be
+        $\tr \left(\rho P_{\lambda}\right)$. Where $P_{\lambda}$ is a projection
+        operator into the eigenstate with eigenvalue $\lambda$.
+\end{enumerate}
+A new problem now is what happens when the resulting density operator is the same
+when combining two different setups. I.E. if you compare two preparations which have
+the same density matrix how can you distiguish them? In this formalism you can't!
+Once things are prepared you cannot distinguish between the two setups as there is
+a "many-to-one" relationship between the initial ensembles and the final
+density matrix.
+
+\begin{theorem}[Unknown]
+\label{unknown}
+Let $\left\{\Ket{\phi_i}\right\}_{i=1}^{n} \subset \mathcal{H}$ and
+$\left\{\Ket{\psi_i}\right\}_{i=1}^{n} \subset \mathcal{H}$, and we have
+the following condition,
+$\sum_{i=1}^{n} \Ket{\phi_i}\Bra{\phi_i} = 
+\sum_{i=1}^{n} \Ket{\psi_i}\Bra{\psi_i}$ iff
+$\exists U \in U(n)$ s.t. 
+$\Ket{\psi_k} = \sum_{j=1}^{n} U_{jk} \Ket{\phi_j}$
+\end{theorem}
+
+We can apply this theorem to density matrices using the following setup
+\begin{corollary}
+Two pure state $\Ket{\phi}$ and $\Ket{\psi}$ have the same
+density matrix if $\Ket{\phi} \propto \Ket{\psi}$. In other words
+if two pure states have the same density matrix then they will represent
+the same quantum state of the system. The only ambiguity is the phase
+\end{corollary}
+
+\begin{corollary}
+Mixture 1 with $\left\{\left(\sqrt{p_i}, \Ket{\psi_i}\right)\right\}$
+and mixture 2 with $\left\{\left(\sqrt{q_i}, \Ket{\phi_i}\right)\right\}$
+have the same $\rho$ iff $\exists U \in U(n)$, s.t.
+$\sqrt{p_i} \Ket{\psi_i} = \sqrt{q_i} \Ket{\phi_i} U$ (implicitly
+the states are in a vector structure).
+\end{corollary}
+
