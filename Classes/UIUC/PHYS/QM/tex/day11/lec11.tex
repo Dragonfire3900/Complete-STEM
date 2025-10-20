@@ -1,0 +1,78 @@
+In classical mechanics there are a few fundamental ideal
+\begin{enumerate}
+    \item Equations of motion are independent of energy "gauge" (reference point of $E$)
+    \item Maxwell's equations are independent of the choice of gauge
+        $\phi \rightarrow \phi +  \frac{1}{c} \diffp{\Lambda}{t}$, and
+        $\vec{A} \rightarrow \vec{A} + \vec{\nabla} \Lambda$. Which can be summarized as
+        $A_{\mu} = \left(\phi, -\vec{A}\right) \rightarrow
+        A_{\mu} + \partial_{\mu} \Lambda$
+\end{enumerate}
+Today we are wanting to quantize the motion of a particle moving through a background classical
+field and see what the Gauge transformations are.
+
+In quantum mechanics the analogous change of reference energy is modififying the 
+Hamiltonian by adding an additional energy term $\mathcal{H} \rightarrow \mathcal{H} + E_0 I$.
+From previous sections we know how the wave function evolves under time and this new
+transformation. So $\Ket{\psi} \rightarrow \Ket{?}$ under the given $\mathcal{H}$ trans.
+Recall
+$$
+    U_{\mathcal{H}} (t, t_0) \Ket{\psi} =
+    e^{-\frac{i}{\hbar} H (t - t_0)}
+$$
+Since the identity operator commutes with everything we will end up finding that
+there is an overall phase shift. Thus,
+$$
+    \Ket{\psi} \rightarrow e^{-\frac{i}{\hbar} E_0 (t - t_0)} \Ket{\psi}
+$$
+Thus, in changing the "reference energy we only have changed the phase. Thus,
+any operator $A$ is gauge invariant then the expectation over time does not change.
+
+\section{Maxwell Interaction}
+Let's start by claiming that the Lagrangian for a QM particle in an electric field is
+$$
+    \mathcal{L} = \frac{1}{2} m \vec{x}^2 - e \phi + \frac{e}{c} \vec{A} \cdot \vec{x}
+$$
+Using this we can come up with two different definitions for momentum
+\begin{enumerate}
+    \item Canonical momentum 
+        $\diff{{\mathcal{L}}}{{\dot{\vec{x}}}} = m \dot{\vec{x}} + \frac{e}{c} \vec{A} = \vec{p}$
+    \item Mechanical or kinematic momentum
+        $\vec{\Pi} \equiv m \dot{\vec{x}} = \vec{p} - \frac{e}{c} \vec{A}$
+\end{enumerate}
+In order for this claimed Lagrangian to be true, it must match the Lorentz force when we look 
+at the overall momentum. Recalling it as the following form
+$$
+    \vec{F} = e \vec{E} + \frac{e}{c} \dot{\vec{x}} \times \vec{B} =
+    -e \vec{\nabla}\phi - \frac{e}{c} \diffp{{\vec{A}}}{t} + 
+    \frac{e}{c} \dot{\vec{x}} \times \left(\vec{\nabla} \times \vec{A}\right)
+$$
+Going through the motions of the Euler-Lagrange equation will show that this is the correct
+Lagrangian. We can now use the Legendre transform to get the Hamiltonian as
+$$
+    \mathcal{H} = \vec{p}\cdot\dot{\vec{x}} - \mathcal{L} =
+    \frac{1}{2m} \left(\vec{p} - \frac{e}{c} \vec{A}\right)^2 + e \phi
+$$
+An important thing to notice is that $\vec{A}$ and $\phi$ are operators since they depend
+on the location where you are evaluating. Using the various cannonical commutators we can find
+the commutation relationship for the mechanical momentum
+$$
+\left[\Pi_i, \Pi_j\right] = \frac{i\hbar e}{c} \epsilon_{ijk} B_k
+$$
+Which gives the following equation of motion
+$$
+    m \diff[2]{{x^H}}{t} = \diff{\vec{\Pi}}{t} =
+    e \left[\vec{E} + \frac{1}{2c}
+    \left(\diff\right)\right]
+$$
+
+\subsection{Magnetic Field in a ring}
+We are going to deal with the magnetic field in a ring of conducting material to see how the
+magnetic flux quantizes. To start off let's say that the magnetic field has the component
+$\vec{B} = B_0 \hat{z}$. From the definition of $\vec{A}$ we can guess what possible values
+of $\vec{A}$ make sense. One such guess which is helpful is
+$$
+    \vec{A} = - \frac{B_0}{2} y \hat{x} + \frac{B_0}{2} x \hat{y} + 0 \hat{z}
+$$
+If you check this you'll find that it produces the correct setup. This also corresponds to
+{\color{red} Coulomb gauge} or $\vec{\nabla}\cdot \vec{A} = 0$. From this you can also work
+with this Gauge in cylindrical coordinates $\vec{A} = \frac{B_0 \rho}{2} \hat{\phi}$.

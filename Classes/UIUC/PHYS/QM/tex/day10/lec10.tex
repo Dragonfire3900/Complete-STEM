@@ -1,0 +1,190 @@
+\section{Feynman Path Integrals}
+Recall that the Feynman kernel is
+$$
+    K(x, t;y, t_0) = \int \mathcal{D}\left[x\right] e^{\frac{i}{\hbar} S(\vec{x})}
+$$
+Today we are wanting to focus on how to do these calculations explicitly. Recall
+that $\mathcal{D}$ is some kind of measure on the path space. This allows us to
+compare how significant certain paths are. Remember that $S$ is also the 
+action with the constraints $\vec{x}(t_0) = y$ and $\vec{x}(t) = x$.
+
+For this formalism there are three different assumptions we need to make
+\begin{itemize}
+    \item In the limit $\Delta t \to 0$, $K(x_{n+1}, t_{n+1}; x_n, t_n) 
+        \sim e^{\frac{i}{\hbar} S}$.
+        This comes from approximating the action as a straight path between the two points.
+        Fomr here you could approximate the action using just the lagrangian itself.
+    \item Straight lines for sufficiently smalle $t$ can be used to approximate the action.
+        This implies $\mathcal{L} \approx \left[
+            \frac{1}{2} m \left(\frac{x_{n+1} - x_n}{\Delta t}\right)^2 -
+            V \left(\frac{x_n + x_{n+1}}{2}\right)
+        \right] \Delta t$
+    \item $K(x_{n+1}, t_{n+1}; x_n, t_n) = \delta (x_{n+1} - x_n)$. This helps pick the
+        normalization of the actions
+\end{itemize}
+This is also similar to the WKB approximation using the classical path as a minimum or
+stable path which will reproduce classical physics.
+
+The question is now, How do we get to the kernel definition above? Recall
+$\mathcal{L} = \frac{1}{2} m \dot{x}^2 - V(x)$ with the corresponding
+Hamiltonian $H = \frac{1}{2} \frac{p^2}{m} + V(x)$. In QM once we have a
+sufficiently simple Hamiltonian we know the time evolution operator
+$U(t_{n+1}, t_n) = e^{-\frac{i}{\hbar} H \Delta t}$. We can apply this
+operator multiple times to get to the two different time periods,
+$U(t, t_0) = \left(e^{-\frac{i}{\hbar} H \Delta t}\right)^{N+1}$
+\begin{align*}
+    K(x, t, y, t_0) 
+    &= \Bra{x} U(t, t_0) \Ket{y} \\
+    &= \int \Bra{x} e^{-\frac{i}{\hbar} H \Delta t} \Ket{x_n}
+        \Bra{x_n} e^{-\frac{i}{\hbar} H \Delta t} \Ket{x_{N-1}} \dots
+        \Ket{y} dx_1 \dots dx_N \\
+    &= \dots \Bra{x_{n+1}} e^{-\frac{i}{\hbar} \left(\frac{p^2}{2m} + V\right) \Delta t}
+        \Ket{x_n} \\
+    &\approx
+        \Bra{x_{n+1}} 1 - \frac{i}{\hbar} \left(\frac{p^2}{2m} + V\right) \Delta t +
+        \mathcal{O}(\Delta t^2) \Ket{x_n} \text{ Stone's theorem}\\
+    &\approx
+        \Bra{x_{n+1}} e^{-\frac{i}{\hbar} \frac{p^2}{2m} \Delta t}
+        e^{-\frac{i}{\hbar} V \Delta t} \Ket{x_n} \text{ Trodder product theorem} \\
+    &= \int \Braket{x_{n+1} | p} \Braket{p | x_n}
+        e^{-\frac{i}{\hbar} \frac{p^2}{2m} \Delta t}
+        e^{-\frac{i}{\hbar} V \left(\frac{x_{n+1} + x_n}{2}\right) \Delta t}
+        dp \\
+    &=  e^{-\frac{i}{\hbar} V \left(\frac{x_{n+1} + x_n}{2}\right) \Delta t}
+        \sqrt{\frac{m}{2 \pi i \hbar \Delta t}} \exp \left[
+            \frac{i}{\hbar} \frac{m}{2} 
+            \frac{\left(x_{n+1} - x_n\right)^2}{\left(\Delta t\right)^2}
+        \right] \Delta t
+\end{align*}
+This gives a series of individual small propogators which add up to the exponential form
+given at the very beginning of lecture. This derivation also gives what the measure has to be
+$$
+    \mathcal{D}\left[x\right] = \prod_{i=1}^{N} 
+    \sqrt{\frac{m}{2 \pi i \hbar \Delta t}} dx_i
+$$
+There is another factor here though that he mentioned but didn't fully describe. It comes from
+there being $N+1$ total propagators.
+
+\subsection{Free particle example}
+For a free particle $H = \frac{p^2}{2m}$, and we know that the form of the propagator is
+$K(x, t; y, t_0) = \sqrt{\frac{m}{2 \pi i \hbar (t - t_0)}} 
+e^{\frac{i}{\hbar} \frac{m \left(x-y\right)^2}{t - t_0}}
+$
+We can to get this propagator by integrating multiple smaller propagators like in the
+Feynman path integral formalism.
+\begin{align*}
+    K
+    &= \lim_{N \to \infty}
+        \left(\frac{m}{2 \pi i \hbar \Delta t}\right)^{\frac{N+1}{2}}
+        \int dx_1 dx_2 \dots dx_n
+        e^{- \frac{1}{2} \frac{m}{i\hbar \Delta t}
+            \sum_{n=0}^{N} \left(x_{n+1} - x_n\right)^2} \\
+\end{align*}
+Although this seems nasty we can use the following formulat
+$$
+    \frac{1}{\sqrt{2 \pi \sigma^2}} \int_{-\infty}^{\infty}
+    e^{- \frac{\left(x-z\right)^2}{2 \sigma^2} - \frac{\left(z-y\right)^2}{2n \sigma^2}}
+    dz = 
+    e^{- \frac{\left(x-y\right)^2}{2(n + 1) \sigma^2}} \sqrt{\frac{n}{n+1}}
+$$
+This allows us to quickly combine the variance of all of the time steps. We will ultimately
+end up with the following
+$$
+    K = 
+        \left(\frac{m}{2 \pi i \hbar (t - t_0)}\right)^{\frac{1}{2}}
+        e^{-\frac{1}{2} \frac{m}{i\hbar (N+1) \Delta t} \left(x-y\right)^2}
+$$
+So far we've calculated this propagator three different ways. Spectral decomposition,
+Gaussian integrals, and time discretation. We can also do the same thing for other cases
+but can be quite cumbersom. However, we can also apply a {\color{red} semi-classical approximation}
+where we assume $\hbar$ is small relative to some order parameter. This would correspond to
+a type of WKB approximation
+
+\subsection{Semiclassical Approximation}
+Say we want to approximate
+\begin{align*}
+    \int_{\mathbb{R}} e^{\frac{i}{\hbar} f(z)} dz \rightarrow \\
+    & \sum_{\text{critical}} e^{\frac{i}{\hbar} f(z_0)}
+        \int_{\mathbb{R}} e^{\frac{i}{\hbar} f'(z_0) (z - z_0) +
+            \frac{i}{\hbar} \frac{1}{2} (z - z_0) f''(z_0) (z - z_0)} dz \\
+    &= e^{\frac{i}{\hbar} f(z_0)}
+        \sqrt{\frac{2 \pi i \hbar }{f''(z_0)}} \\
+    &= e^{\frac{i}{\hbar} f(z_0)}
+        e^{i \nu \frac{\pi}{4}}
+        \sqrt{\frac{2 \pi \hbar}{\abs*{f''(z_0)}}}, \; \nu = \text{sgn} \left(f''(z_0)\right)
+\end{align*}
+This is under the case that $\hbar \to 0$. At a critical point the phases of the
+individual values will constructively add together. We will want to then take this
+approximate the action semi-classically. Meaning
+$S(x) = S(x_{cl} + \delta x) = S(x_{cl}) + \delta S(x_{cl}) \delta x + 
+\frac{1}{2} \delta^2 S \delta x^2$
+It's possible for the second order paths to have positive, negative, or zero eigen values
+which will cause an integration over all paths which is divergent. This is what gives rise to
+regularization by controlling the overall "strength" of this second order term. Showing the
+specific form of this term takes quite a bit of time so we'll skip around a bit. Let's
+focus first on how the first approximation occurs
+\begin{align*}
+    S(x_{cl} + \delta x)
+    &= \int_{t_0}^{t} \left[
+        \frac{1}{2} m  \left(\dot{x}_c + \dot{\delta x}\right)^2 -
+        V (x_c + \delta x)
+        \right] \\
+    &= S(x_{cl}) + \int_{t_0}^{t} \left[m \dot{x}_c \delta x - V'(x_c) \delta x\right] dt +
+    \\&\hspace{1cm}
+        \int_{t_0}^{t} \left(\frac{1}{2} m \left(\delta x\right)^2 - 
+        \frac{1}{2} V''(x_c) \delta x^2\right) dt \\
+    &= S(x_{cl}) + \int_{t_0}^{t}
+        \delta x \left(-\frac{1}{2} m \diff[2]{}{t} - \frac{1}{2} V''(x_c)\right) \delta x
+\end{align*}
+This last term is the curvature of the setup and represents the Wick rotated time due to the
+negative sign on everything. We can define the operator
+$$
+    -B = m \diff[2]{}{t} + V''(x_c)
+$$
+We only need to worry about the negative eigenvalues of $B$ which we will represent as
+$\nu$. This finally gives rise to the Van Vlack formula which is a semi-classical approximation
+$$
+    K(x, t; y, t_0) \approx \frac{1}{\sqrt{2 \pi i \hbar}}
+        e^{- \frac{i \pi}{2} \nu}
+        \abs*{\diffp{S}{{x}{y}}}^{\frac{1}{2}}
+        \exp \left(\frac{i}{\hbar} S(x, t; y, t_0)\right)
+$$
+where $S$ in this is the classical action. This can be used to simplify quite a few
+problems under the right conditions. This formula is useful if you are able to approximate
+the leading order term in a sensible way. 
+
+The main reason to write down the Feynman path formalism is to study QFT and to understand
+how particles interact with electromagnetic fields.
+
+\section{E\&M Hamiltonian}
+Let's start with a Gauge Transformation. There are many different meanings behind this term
+to start it can mean "to set the initial energy" or the reference energy. In what sense
+is this true? Recall from CM Hamiltons equations in phase space are
+$\dot{z} = J \nabla_z H$, where $z^T = \left(\vec{p}, \vec{q}\right)$. This
+definition is invariant under the shift $H \rightarrow H + H_0$ as taking the gradient
+will nulify the constant. This results in the idea that
+{\color{red} dynamics are invariant under an energy shift gauge transformation}.
+
+In E\&M there is also a different degree of freedom (generated by a $U(1)$ invariance)
+which allows you to choose how to represent Maxwell's equations. We can work through
+this as follows using the Maxwell equations,
+\begin{itemize}
+    \item $\vec{E} = - \nabla \phi - \frac{1}{c} \diffp{\vec{A}}{t}$
+    \item $\vec{B} = \vec{\nabla} \times \vec{A}$
+\end{itemize}
+Which are invariant under the following transformations,
+$\phi \rightarrow \phi - \frac{1}{c} \diffp{\Lambda}{t}$ and
+$\vec{A} \rightarrow \vec{A} + \nabla \Lambda$. We can do this in a covariant
+way though which will help for QFT. Let's do this as follows
+\begin{align*}
+    \partial_{\mu} = \left(\frac{1}{c} \diffp{}{t}, \vec{\nabla}\right) &
+    \partial^{\mu} = \left(\frac{1}{c} \diffp{}{t}, -\vec{\nabla}\right) \\
+    A_{\mu} = \left(\phi, -\vec{A}\right) &
+    A^{\mu} = \left(\phi, \vec{A}\right)
+\end{align*}
+Under this description we can write the gauge transformations as
+$A'_{\mu} = A_{\mu} + \partial_{\mu} \Lambda$ and most of the
+Maxwell formalism as $F_{\mu \nu} = \partial_{\mu} A_{\nu} - \partial_{\nu} A_{\mu}$.
+There are two different common gauges.
+$\vec{\nabla} \cdot \vec{A} = 0$ which is the Coulomb gauge and
+$\partial_{\mu} A^{\mu} = 0$ which is the Lorentz gauge

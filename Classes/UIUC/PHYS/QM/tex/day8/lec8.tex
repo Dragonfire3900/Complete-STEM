@@ -1,0 +1,96 @@
+\section{Coherent States}
+These are the QM analogue of classical motion in the phase space for the SHO.
+The expectation of the position and momentum operators reproduce classical
+behavior. $\Ket{n}$ SHO when quantized is equivalent to the number of photon states.
+This coherent state has Poisson distribution with 
+$\mathbb{P}(n) = \frac{e^{\lambda}}{n!} \lambda^n$
+
+First quantiztion is turning things into operators. The second quantization is turning
+the wave function into operators. This will give quantization for QFT.
+
+In order to generate classical motion we need to kick the SHO in both
+position and momentum space. We can use BCH theorem to combine the exponentiation
+of the "kick" operator. This helps build up the $\mathcal{D}(\alpha)$ which is what the
+HW is on.
+\begin{align*}
+    e^{\frac{i}{\hbar} p_0 \hat{x}} e^{-\frac{i}{\hbar} \hat{p}x_0}
+    \Ket{0}
+    &=
+\end{align*}
+We can define the displacement operator using this format
+$$
+    \mathcal{D}(\alpha) = \exp \left(
+        \frac{i}{\hbar} p_0 \hat{x} - \frac{i}{\hbar} \hat{p} x_0
+    \right)
+$$
+We can write this in terms of the creation and annihilation operators using
+\begin{align*}
+    \hat{x} = \gamma \left(a^\dagger + a\right), & \gamma = \sqrt{\frac{\hbar}{2m \omega}} \\
+    \hat{p} = i \delta (a^\dagger - a), & \delta = \sqrt{\frac{\hbar \omega m}{2}}
+\end{align*}
+This gives the definitions for the annihilation and creation operators.
+We can also show that the coherent state is defined using the displacement operator
+$$
+    \Ket{\alpha} = \mathcal{D}(\alpha) \Ket{0}
+$$
+We can also conclude is that the coherent state is an eigenstate of the annihilation operator
+We can also conclude the expectations
+\begin{align}
+    \Bra{\alpha}x\Ket{\alpha} = x_0 = 2 \gamma \Re(\alpha) \\
+    \Bra{\alpha}p\Ket{\alpha} = p_0 = 2;d \Im(\alpha) \\
+    \Bra{\alpha}N\Ket{\alpha} = \abs*{\alpha}^2 \\
+    \Braket{n | \alpha} = \left<N\right>_{\alpha}^n e^{-\left<N\right>_{\alpha}} / n! \\
+\end{align}
+This is in the Schrodinger picture but we can also look at the Heisenberg picture
+\begin{align}
+    \Bra{\alpha}x^H(t)\Ket{\alpha} = x_0 \cos \left(wt\right) + 
+        \frac{p_0}{m \omega} \sin \left(\omega t\right) \\
+    \Bra{\alpha} p^H(t) \Ket{\alpha} = \text{ skipped in notes}
+\end{align}
+In addition coherent states satisfy the minimum uncertainty principle. This comes from
+translating a Gaussian still being a Gaussian.
+{\color{green} We can also look at the Strum-Louiville formalism in lecture notes}
+
+\section{WKB Approximation}
+The overall idea is to linearize the potential at the crossing points at the crossing
+point between two sides of the energy. This is best shown by the following linear problem
+$$
+    \left(- \frac{\hbar^2}{2m}\diff[2]{}{x} + k \abs*{x}\right)\psi = E \psi,
+    \; k>0
+$$
+In general we expect that the wave function will match the parity of the Hamiltonian.
+\subsection{Airy Functions}
+Can build up the Airy equation by demanding that the coefficients of the two terms
+are equal to one another (after shifting the linear term).
+$$
+    \diff[2]{u(z)}{z} = z u(z)
+$$
+This is very similar to SHO/exponential differential equations. It just depends on the value
+of $z$. This differential equation has two different indept solutions. $Ai(z)$ which decays
+as $z \to \infty$ while $B(z)$ blows up. This means that $Ai(z)$ is good for studying 
+bound state particles like within the WKB approximation.
+
+We can look at what kinds of solutions make sense based on the extremas of the Airy
+functions and zeros. With the derivative solutions being the even solutions while the
+odd being the function being zero.
+
+\subsection{Asymptotic approximations}
+What we care about are asymptotic approximations not just Taylor series. In particular
+we need to define where the approximation is valid. In particular we have the following
+definition. These expansions are not unique as we can add a small function and the ratio
+will limit to $1$. In addition, asymptotic series do not always get better when adding
+additional terms. There is a limit to how many terms will help. In general when you add
+too many terms you will end up with a divergence.
+
+A good example of asymptotic approximation is Stirling's Formula. For the Airy functions
+there are also various Asymptotic expansions which can be incredibly helpful
+
+\subsection{WKB Approximation}
+Stands for the names of three different people. It is a general framework within mathematics
+instead of just a QM approximation. It is a semi-classical approximation of 
+eigenvalues and eigenvectors of the Hamiltonian. It has an assumption that he Hamiltonian
+is slowly varying.
+
+Typically is very useful in 1D. In general it's valid when the potential $V(x)$ is slowly
+varying compared to the de Broglie wavelength of the particle.
+

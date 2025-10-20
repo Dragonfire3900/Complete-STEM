@@ -1,0 +1,7 @@
+#Ignoring latex artifacts
+*.log
+*.pdf
+*.synctex.gz
+*.fdb_latexmk
+*.aux
+*.fls

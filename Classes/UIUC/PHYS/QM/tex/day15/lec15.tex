@@ -1,0 +1,191 @@
+\section{Rotation matrices}
+We have actual notes this time on canvas! Last time we realized that $\mathcal{H}_l$
+can be represented by the spherical harmonic functions. In particular we can define
+these representations via the map $\rho^{\left(l\right)}: SO(3) \rightarrow GL(2l+1, \mathbb{C})$.
+The basis elements of this map are the three spherical harmonics
+$Y_1^0$, and $Y_1^\pm$.
+
+When rotating around $\hat{z}$, $\theta \mapsto \theta$ and $\phi \mapsto \phi + \eta$.
+From this we know that only $Y_1^\pm$ is going to be modified by picking up a phase.
+We'll then know the matrix $\rho^{(l)}$ based on how this modifies the function.
+
+\section{Representations and their meaning}
+Finding a representation of a Lie Group can be quite tedious as shown in the homework.
+Instead it is much easier to work with a related concept to the representors of
+$SU(2)$. This is what's typically done in QM work.
+
+To start recall that $SU(2)$ is just the three sphere: $S^3 \cong SU(2)$. We also
+know that $S^3 /\mathbb{Z}_2 \cong SO(3 \cong \mathbb{R} P^3$, where
+$\mathbb{R} P^3$ is the real projective space. We can then work with the tangent
+space fixed around the identity of $S^3$. We can then parameterize the manifold
+around this point using a chart. Since the only difference between
+$SU(2)$ and $SO(3)$ is modding out the negative identity, they will end up
+having identical tangent spaces between the two. They will end up having isomorphic
+\textbf{vector space structure} and \textbf{tangent space algebra}
+(Lie algebra). We will denote the algebra using lowercase letters $su(2) \cong so(3)$.
+As a result they will have the same kinds of generators, which are the angular momentum
+operators.
+
+Importantly you can take the exponential of the generators to map from the Lie algebra
+to the "universal cover" of your Lie Group. As an example
+$e^{-i \theta \vec{J}\cdot\vec{n}}$ is the representor of the $SU(2)$ group based
+on the specific rotational operator we use. 
+
+\section{Covers of $SU(2)$}
+Let $\vec{J} = \frac{\hbar}{2} \vec{\sigma}$, with the following
+commutator
+$$
+    \left[J_i, J_j\right] = i \hbar \epsilon_{ijk} J_k
+$$
+Whenever we work in higher dimensions we want spin to have these
+same commutation relationships. Thus, we want to have a homomorphism
+that preserves the group structure. In other words a map from the Lie
+algebra to the Lie Group
+
+Def: A Lie algebra is a vector spae $\mathcal{L}$ endowed with a Lie bracket 
+$[\;,\;]: \mathcal{L} \times \mathcal{L} \rightarrow \mathcal{L}$, s.t.
+the bracket is anti-commutive, linear in the first argument, and 
+satisfies the Jacobi identity, ($\forall a, b, c \in \mathcal{L}$,
+$\left[\left[a, b\right], c\right] + \text{cyc. permutations} = 0$.
+
+A good example of this is the cross product. Thus, the cross product is nothing
+but a Lie algebra on a vector space! Which is also why it doesn't generalize to higher
+dimensions.
+
+Def: Endomorphism, denoted 
+$\text{End}(\mathbb{C}^n) = \left\{\text{all linear maps on } \mathbb{C}^n\right\}$
+(without requiring an inverse exists) which has a commutator defined by the Lie bracket.
+
+Def: A Lie algebra homomorphism is a $\phi: \left(\mathcal{L}_, \left[,\right]\right) \rightarrow
+ \left(\mathcal{L}_2, \left[,\right]\right)$ is a linear map
+that preserves the Lie bracket. I.E. $\forall a, b \in \mathcal{L}_1$,
+$\phi \left(\left[a, b\right]_1\right) = \left[\phi \left(a\right), \phi(b)\right]_2$
+
+We're working through all of these definitions to construct a mapping from
+$su(2)$ to all Endomorphisms of $\mathbb{C}^n$. In other words,
+the map $su(2) \rightarrow \text{End} \left(\mathbb{C}^n\right)$. We can map this
+via the following exponential map,
+$$
+\rho_{SU(2)} \left(e^{- \frac{i}{\hbar} \vec{J} \cdot \vec{n}}\right) =
+    \exp \left(- \frac{i}{\hbar} \theta \rho_{su(2)} \left(\vec{J}\right) \cdot \vec{n}\right)
+$$
+We've worked through the left hand side in HW 7 but it was quite tedious. Working with the
+right hand side is much easier and will lead to the same result. Let's look at how this
+works for spin!
+
+\subsection{Exponential maps for Spin}
+First off let's recall
+$$
+    J^2 \equiv J_1^2 + J_2^2 + J_3^2
+$$
+Since $J_i$ is Hermitian $J^2$ is also Hermitian. There are two important facts about this
+operator
+\begin{enumerate}
+    \item $J^2$ is positive semi-definite
+    \item $\left[J^2, \vec{J}\right] = 0$. Meaning that it commutes will all other operators.
+        We call $J^2$ operators the Casimir operator
+\end{enumerate}
+From here we can arbitrarily choose one of the three $J_i$ to be simultaneously diagonalized
+as $J^2$. This choice will set our convention for what spins we work with. We'll follow
+typical convention and choose $J_z$. Let $\Ket{\lambda,\alpha}$ be s.t.
+$J^2 \Ket{\lambda,\alpha} = \lambda \Ket{\lambda,\alpha}$ and 
+$J_z \Ket{\lambda,\alpha} = \alpha \Ket{\lambda,\alpha}$. We want to find what
+the values of $\lambda$ and $\alpha$ are just using these commutation relationships.
+
+We can approach this by using ladder operators by defining
+$J_\pm = J_x \pm i J_y$. You can show the following properties
+using the known commutator
+\begin{enumerate}
+    \item $\left[J_+, J_-\right] = 2 \hbar J_z$
+    \item $\left[J_z, J_\pm\right] = \pm \hbar J_\pm$
+    \item $\left[J^2, J_\pm\right] = 0$
+    \item $J_\pm J_\mp = J^2 - J_z^2 \pm \hbar J_z$
+    \item $J^2 - J_z^2 = \frac{1}{2} \left(J_+ J_- + J_- J_+\right)$
+\end{enumerate}
+All of these can be shown via the commutation relationships. Since $J^2$ is positive
+semi-definite we can put constraints on $\alpha$ and some higher state $\beta$ such that
+they are annilated by the raising/lowering operator. This mainly comes from the last
+property in which the left and right hand side must be positive semi-definite. 
+
+We can find these constraints by looking at the state
+$J_+ \Ket{\lambda,\alpha} = 0$ and $J_- \Ket{\lambda,\beta} = 0$. Then by taking
+the expectation we can find two coupled equations
+\begin{align}
+    \lambda - \alpha^2 -\hbar \alpha = 0 \\
+    \lambda - \beta^2 + \hbar \beta = 0
+\end{align}
+We will end up with two different conditions: $\alpha = -\beta$ and
+$\alpha = \beta - \hbar \Rightarrow \alpha < \beta$. Since we are looking
+for $\alpha$ to be the top value we will disregard the second condition.
+From this we can find the quantization condition (based on the difference
+between $\alpha$ and $\beta$) and find the values of $\lambda$ and $\alpha$.
+In particular $\alpha = \hbar n /2$, and $\lambda = \hbar^2 j(j+1)$ where
+$j = n/2$. We end up with a dimensionality of $2j+1 = n+1$ since these are all
+of the possible states. 
+
+To summarize exponentiating the Lie algebra may not give you the original
+group you were working with but will give you a universal cover of that group
+(a simply connected manifold of that space).
+
+\subsection{Examples}
+Show $J_\pm \Ket{j,m} = \sqrt{(j\mp m)(j\pm m + 1)} \hbar \Ket{j,m\pm1}$.
+
+We'll start by exponentiating our representation
+\begin{align*}
+    \Bra{j',m'} e^{-\frac{i}{\hbar} \rho \left(\vec{J}\right) \cdot \hat{n} \phi}
+        \Ket{j,m} = \delta_{jj'} 
+        \Bra{j,m'} e^{-\frac{i}{\hbar} \vec{J} \cdot \hat{n} \phi} \Ket{j,m}
+\end{align*}
+We're going to omit the representation function $\rho$ because it's a bit
+tedious to write down so it will be implicit in the exponential. We'll
+also define this matrix element to be
+$\mathcal{D}_{m'm}^{(j)} \left(R \hat{n}, \phi\right)$. Depending
+on what you are looking at these elements can be really easy to calculate. Such as
+rotating along $\hat{z}$ by some angle.
+$$
+    \mathcal{D}_{m'm}^{(j)} = e^{-im \phi} \delta_{j 0}
+$$
+Finding any further elements will require an understanding that we can decompose
+any rotation via the Euler angles. Since two of these rotations are along $\hat{z}$
+they will already be diagonalized. We can then further write down these rotation elements using
+\begin{align*}
+    \mathcal{D}_{m'm}^{(j)} \left(\alpha, \beta, \gamma\right) \equiv
+        \Bra{j,m'} e^{-\frac{i}{\hbar} J_z \alpha}
+        e^{-\frac{i}{\hbar} J_y \beta} 
+        e^{-\frac{i}{\hbar} J_z \gamma} \Ket{j,m} =
+    e^{-\frac{i}{\hbar} \left(\alpha m' + \gamma m\right)}
+        \Bra{j,m'} e^{-\frac{i}{\hbar} J_z \beta} \Ket{j,m}
+\end{align*}
+Thus, if you know how to rotate around the $y$-axis you can rotate in any desired way
+in a quantum mechanical sense. Sakurai defines this inner product as $d^{(j)}_{m'm}(\beta)$.
+
+We can show what the spin half matrix looks like as follows
+$$
+    \mathcal{D}^{\frac{1}{2}}(\alpha, \beta, \gamma) =
+        \begin{pmatrix}
+            e^{-\frac{\alpha}{2}i} & 0 \\
+            0 & e^{\frac{\alpha}{2}i}
+        \end{pmatrix}
+        \begin{pmatrix}
+            \cos \frac{\beta}{2} & -\sin \frac{\beta}{2} \\
+            \sin \frac{\beta}{2} & \cos \frac{\beta}{2}
+        \end{pmatrix}
+        \begin{pmatrix}
+            e^{- \frac{\gamma}{2} i} & 0 \\
+            0 & e^{\frac{\gamma}{2}i}
+        \end{pmatrix}
+$$
+In our problem set we will be explicitly calculating $d^{(1)}_{m'm}$
+
+\section{Orbital Angular momentum}
+In classical mechanics orbital angular momentum is $r \times p$. We want to do the same
+analog in quantum mechanics. We can do this by taking the spherical harmonics as our basis.
+We will be looking for
+$$
+    \mathcal{D}^{(l)} (R) Y_l^m(\vec{x}) = Y_l^m \left(R^{-1} \vec{x}\right)
+$$
+We can see if this definition works by exponentiating our angular momentum operator
+on both sides of this expression. Expanding things out goes as follows,
+\begin{align*}
+    e^{-\frac{i}{\hbar} \left(\vec{L}\cdot \hat{n}\right)\phi} Y_l^m (\vec{x}) =
+\end{align*}

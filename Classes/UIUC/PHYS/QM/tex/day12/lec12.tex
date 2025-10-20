@@ -1,0 +1,164 @@
+\section{Chapter 3 Sakurai. Symmetry}
+This whole chapter is about spin and rotation via symmetry. He typically connects it to
+group theory quite a bit which is nice! This in theory should be self contained so let's go!
+
+\section{Group Theory}
+Def: A set $G$ with a binary operation $*: G \times G \rightarrow$ st the following is true
+\begin{enumerate}
+    \item $*$ is associative
+    \item $\exists e \in G$, st $\forall g \in G$, $e * g = g = g * e$ (identity)
+    \item $\forall g \in G$, $\exists g^{-1} \in G$, st $g^{-1} * g = e = g * g^{-1}$
+\end{enumerate}
+A good example of a group are the integers which are a group under addition but not
+multiplication ($<\mathbb{Z}, +>$). Another definition is abelian
+
+Def: A group $G$ is abelian if $*$ is commutative. 
+We denote $*$ as $+$ and $e$ as 0 in this case. Otherwise, $G$ is called non-abelian.
+
+Most of the symmetry groups we will deal with are going to deal with are non-abelian.
+We'd like to organize the systems we can solve into symmetry structures. This can be done
+through representations which will be explained later.
+
+Rotation will be shown to be $SU(2)$ instead of $SO(3)$ which actually allows for Fermions
+to exist somehow.
+
+Def: A Lie group $G$ is a group that is also a differentiable manifold w/ $*$ that
+is smooth. I.E. you can apply calculus in some way. 
+
+We're going to work through this largely by showing examples instead of working
+with the formal definitions. So pay attention. Importantly $SO(3)$ is a projective manifold
+of $\mathbb{R}^3$. It is a projection of the $SU(2)$ space. 
+
+Def: A field $\left<\mathbb{F}, +, \times\right>$ is a set that is an 
+abelian group under $+$ \& $\mathbb{F}^* \equiv \mathbb{F} \ \{0\}$ is a set that is an
+abelian group under $\times$ \& $\forall f, g, h \in \mathbb{F}$,
+$f \times \left(g + h\right) = f \times g + f \times h$.
+
+Def: The simplest non-abelian group is $GL(n, \mathbb{F}) = \{ n\times n 
+\text{invertible matrices over } \mathbb{F}\}$ is a group.
+
+The idea is that given
+some group how do we make sense of the elements of the group. We can do this by understanding
+the action of the group on some space. We can find a representation by finding the element
+in another group that we do understand
+
+Def: $\phi: G_1 \rightarrow G_2$ is called a homomorphism $\forall f, g \in G$, if
+$\phi \left(f * g\right) = \phi(f) * \phi(g)$. 
+A bijective homomorphism is called an isomorphism.
+
+\subsection{$\mathbb{Z}_n$ group}
+This group is defined as $\left<\mathbb{Z}_n, +\right>$, $\mathbb{Z}_n = \{0, \dots, n-1 \}$.
+With the operation $a + b (\mod n)$. is an abelian group. If $p$ is a prime, then
+$\left<\mathbb{Z}_p, +, \times\right>$ is a field. The claim is that $\mathbb{Z}_2$ is 
+isomorphic to something similar to the Pauli matrices
+$$
+    \mathbb{Z}_2 \equiv \{0, 1 \} \cong
+    \left<\left\{I, \sigma_x\right\}, \times\right>
+$$
+It's much easier to work with $\mathbb{Z}_2$ rather than the Pauli matrices.
+
+Def: A representation of $G$ is a homomorphism $\phi G \rightarrow GL(n, \mathbb{C})$. This
+is a particular definition is for this class in particular. The elements of the quantum state
+will be elements of the $GL$ space. We can reduce these representations if we can block
+diagonalize these representations into independent parts.
+$$
+    \mathcal{H} = \oplus_{n} \mathcal{H}_n
+$$
+
+Def: Vector spaces $V$, $U$, $W$, $U = V \oplus W$ st., 
+$\forall u \in U$, $\exists v \in V \& w \in W$ st. $u = v + w$. $U \cap W = \{0\}$.
+
+\subsection{Identity proofs}
+Suppose $e_1$ \& $e_2$ are identities of $G$. Then
+$e_1 = e_1 * e_2 = e_2$.
+Which shows that the identity elements are unique.
+
+Suppose $f, h$ are inverse of $g \in G$. Then,
+$f = f * e = f * (g * h) = (f * g) * h = e * h = h$
+which shows that inverses are unique
+
+\subsection{Symmetric groups}
+Def: $S_n = \{ \text{all permutations of } n \text{ distinct elements}\}$. This is non-abelian
+for $n > 2$. Importantly $\abs*{S_N} = N!$. A good example is
+$S_2 \cong \left< \mathbb{Z}_2, +\right>$. Another good example is $S_3$ which shows that
+the individual permutations can be broken down into a product of transpositions. The evenness
+is preserved under any representation. Any even number of transpositions will always be this way.
+From this we can give the following definitions
+\begin{enumerate}
+    \item even permutation: $\pi$ is a product of even \# of transpositions
+    \item odd permutation: $\pi$ is a product of odd \# of transpositions
+\end{enumerate}
+We will encounter identitcal paritcles in 581 a lot more. 
+
+{\color{green} A few exercises for you. Show the two following $\phi(e_1) = e_2$ and
+$\phi(g^{-1}) = \phi(g)^{-1}$}
+
+\section{Lorentz Group}
+In order to understand the applications of group theory correctly we need to review
+how special relativity plays into things. This means we need to deal with the Lorentz group.
+We need to introduct a scalar product on $\mathbb{R}^4$.
+
+Def: Minkowski scalar product: 
+$\left<\;,\;\right>_M: \mathbb{R}^4 \times \mathbb{R}^4 \rightarrow \mathbb{R}$ 
+a bilinear map s.t.
+$\forall x, y \in \mathbb{R}^4$, 
+$\left<x, y\right>_M = \left<x, gy\right>_{\text{Euclidian}}$, where $g$ is the
+Minkowski "metric" (it's not really a metric). In particular,
+$x_{\mu}^2 = x^t g x = x_0^2 - \vec{x}^2$ 
+$\left(x = \begin{pmatrix} x_0 \\ \vec{x} \end{pmatrix} \in \mathbb{R}^4, \;x_0 = ct\right)$
+When you demand that the Minkowski norm is constant you end up finding a hyperboloid. There
+are two different kinds of seperations from the origin, space-like and time-like. The question
+then becomes {\color{red} what transformations keep the Minkowski norm fixed?}.
+
+Def: Lorentz group $O(1, 3) \subset GL(4, \mathbb{R})$ s.t.
+
+$$
+  O(1, 3) = \{ \Lambda \in GL(4, \mathbb{R}) \vert
+  \left<\Lambda x, \Lambda y\right>_M = \left<x, y\right>_M \forall x, y \in \mathbb{R}^4\}  
+$$
+
+Effectively $\Lambda^t g \Lambda = g$. The first main property is that
+$\det \left(\Lambda\right) = \pm 1$. This property implies that the general Lorentz transformation
+can be broken into two parts
+$$
+    O(1, 3) = SO(1, 3) \sqcup O(1, 3)_{-}
+$$
+The $SO(1, 3)$ is considered the "proper Lorentz transformation" while the other
+are the "improper Lorentz transforms". Furthermore $SO(1, 3)$ can be broken down
+into the $SO(1, 3)^{+}$ (orthochronos/ restricted Lorentz group) and the 
+$SO(1, 3)^{-}$ (time reversal group). Only the $SO(1, 3)^{+}$ is a group as it contains
+the identity. Looking at the dimensionality of the various groups we are working with
+reveals a subgroup of $SO(1, 3)^{+}$ being $SO(3)$. This is done by considering the block
+matrix $\begin{pmatrix} 1 & 0 \\0 & R \end{pmatrix}$ with $R \in \mathbb{R}^{3 \times 3}$.
+
+Importantly $SO(3)$ is a classical rotation in $\mathbb{R}^3$. This is from the following
+Theorem.
+
+ThM: Any $R \in SO(3)$ is a rotation around some axis. The overall proof is as follows,
+$\det (R) = 1 = \lambda_1 \lambda_2 \lambda_3$, $\lambda_i$ are the eigenvalues of $R$.
+Taking the complex conjugate of the e.value equation we can conclude that
+$\bar{\lambda}_i$ is also an e.val. We can also show that the norm of some eigen vector
+$\nu$ is preserved under the action of $R$ which implies that the eigen values are on the
+unit circle. As a result the e.vals come in complex conjugate pairs and there must always be
+one axis of rotation with an e.val of $1$. 
+
+Importantly the determinant is continuous and the top vs. bottom rows are disconnected due
+to different signs in the determinant. We can also show that the two columns are disconnected
+from one another.
+This can be established by looking at the general form
+of the $0, 0$ element. 
+
+\subsection{Boosts}
+Def: $\Lambda \in SO(1, 3)^{+}$ is called a boost in the direction
+$\vec{n} \in \mathbb{R}^3$ if the plane orthogonal to $\vec{n}$ is invariant
+under $\Lambda$. Boosting can be written as the following
+$$
+\begin{pmatrix}
+    \cosh \chi & \sinh \chi & 0 & 0 \\
+    \sinh \chi & \cosh \chi & 0 & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1
+\end{pmatrix}
+$$
+where $\cosh \chi = \frac{1}{\sqrt{1 - \beta^2}}$. In this course we will be taking the 
+active transformations instead of the passive transformations. 

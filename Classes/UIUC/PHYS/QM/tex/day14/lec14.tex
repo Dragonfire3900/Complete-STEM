@@ -1,0 +1,238 @@
+\section{Review of last time}
+Given a rotation $R_{\vec{n}}(\theta)$ around $\vec{n}$ by angle $\theta$
+$$
+    R_{\vec{n}} \longleftrightarrow^{1:2} U_{\vec{n}}(\theta) =
+    e^{-\frac{i}{2}\theta \vec{n}\cdot\vec{\sigma}}
+$$
+s.t.
+$$
+    U_{\vec{n}}(\theta) \left(\vec{x}\cdot\vec{\sigma}\right)
+    U_{\vec{n}}(\theta)^\dagger = 
+    \left(R_{\vec{n}}(\theta) \vec{x}\right)\cdot \vec{\sigma}
+$$
+Given a boost along $\vec{n}$ by $\frac{v}{c} = \tanh \chi$,
+$$
+B_{\vec{n}}(\chi) \longleftrightarrow^{1:2} H_{\vec{n}}(\chi) = 
+e^{\frac{1}{2} \chi \vec{n}\cdot\vec{\sigma}}
+$$
+s.t.
+$$
+H_{\vec{n}}(\chi) x_{\mu} \cdot \sigma_{\mu} H_{\vec{n}}(\chi) =
+    \left(B_{\vec{n}}(\chi) x_{\mu}\right) \cdot \sigma_{\mu}
+$$
+
+\section{Rotations}
+These two constructions show that there is a two to one cover between
+$SO(1,3)^+$ and $SL(2, \mathbb{C})$. Since we are not going through QFT
+we will restrict ourselves to the rotation subgroup $SO(3)$.
+
+Def: Homomorphism. For $\phi: G_1 \rightarrow G_2$ is a homomorphism if
+$\forall g_1, g_2 \in G$, $\phi(g_1, g_2) = \phi(g_1) \phi(g_2)$.
+
+It's hard to understand the action of a group so we can fix
+something that helps us visualize this. We can do this by
+fixing a vector space and see how the group acts
+on that matrix space. The typical way we can do this
+is by mapping from the original group to $GL(n, \mathbb{C})$
+via a homomorphism
+
+Def: A representation of a Lie group $G$ is a continuous
+group homomorphism $\phi: G \rightarrow GL(n, \mathbb{C})$
+
+The question is can we decompose this representation into
+multiple simplier representations? As good example is the tensor
+product between two vector spaces for spins. The simplest possible
+space is the irreducible representation of a vector space.
+
+Def: $W \subset \mathbb{C}^n$ is called invariant if $P(G)W \subset W$. Thus,
+$W$ is an invariant subspace of $\mathbb{C}^n$
+
+Def: A rep $P$ is called irreducible (irrep) if
+$\{0\}$ is the only invariant subspace.
+
+So if you scan through actions of all elements of $G$ and there isn't an
+invariant subspace for all actions.
+We will be showing how to construct irreps for the various groups. 
+
+\section{Irreps?}
+In QM it's important to realize that these irreps are our friends and are very helpful
+for many different problems. In particular we are interested in irreps
+which are in the unitary subgroup of $GL$.
+
+If $P$ is a unitary rep, i.e. $P(G) \subset U(n)$ then
+$$
+    P(g) =
+    \begin{pmatrix}
+        A & 0 & 0 \\
+        0 & B & 0 \\
+        0 & 0 & C
+    \end{pmatrix}
+$$
+In other words it is block diagonal.
+
+Let $W \subset \mathbb{C}^n$ be an invariant subspace of $P$
+then $\forall w \in W$, $w^\perp \in W^\perp$, $g \in G$, then
+$\left<P(g) w, P(g) w^\perp\right> = \left<w, w^\perp\right> = 0$.
+This comes from a unitary representation not affecting the 
+inner product of the space. Since $w$ and $w^\perp$ have an inner product
+of $0$, We can break $\mathbb{C}^n$ into two different subspaces using the
+direct sum. I.e. $\mathbb{C}^n = W \oplus W^\perp$.
+
+
+\subsection{Irreps of $SO(3)$}
+Let $R \in SO(3)$ that is constant. Let's $\vec{y} = R \vec{x}$ and we will look
+at how the gradient transforms. From chain rule $\nabla \vec{y} = R \nabla\vec{x}$.
+From this we can figure out how the Laplace operator transforms,
+$\nabla^2_y = \nabla_y \cdot \nabla_y = \nabla_x R^t R \nabla_x = \nabla^2_x$.
+Thus, the Laplace operator is invariant under $SO(3)$.
+
+Let $\mathcal{H}_l = \{ \text{deg } l \text{ homogeneous harmonic polynomial in } x, y, z
+\text{ over } \mathbb{C}^n\}$
+Putting in these polynomials into the Laplace operator,
+$\nabla^2_y f(x) = 0 = \nabla_x^2 f(R \vec{x})$. Thus, if you
+rotate the polynomials $f$ you get another $f$ with the same
+overall setup. As a result we would like to see how these various polynomials
+rotate between each other under $R$. We will end up finding that the dim of
+... is 12 + 1
+
+Let $f \in \mathcal{H}_l$ be expanded as
+$$
+f(\vec{x}) = \sum_{\alpha \ge 0, \beta \ge 0, l - \alpha - \beta \ge 0}
+(x + iy)^\alpha (x - iy)^\beta z^{l - \alpha - \beta}
+$$ 
+Let's switch over to
+spherical coordinates, we will define $\theta$ as the polar angle and $\phi$ as the azimuthal
+angle. We get the following
+$$
+    f(\vec{x}) = \sum_{\alpha, \beta}
+    r^l \left(\sin \theta\right)^{\alpha+\beta}
+    \left(\cos \theta\right)^{l - \alpha - \beta}
+    e^{i \varphi(\alpha - \beta)}
+$$
+From here we will define $m \equiv \alpha - \beta$ which we can sum over.
+We can change our sum to have this difference be fixed. We get the following
+$$
+= \sum_{m = -l}^{l} r^l \sum_{\alpha, \beta, \alpha - \beta = m}
+    A_m g^m_l \left(\theta\right) e^{im \varphi}
+$$
+We are going to demand that this whole polynomial to be harmonic. Which amounts to
+solving for the coefficients $A_m$. Using the Laplace operator we can find the
+differential equation which $g_l^m$ must satisfy. This turns out to the differential
+equation to the associated Legendre polynomials. I.E.
+$g_l^m(\theta) = P_l^m(\cos \theta)$. We can then find the normalization coefficients
+of this wave function over the angular component. We end up with the spherical harmonics
+$$
+    Y_l^m(\theta, \phi) = (-1)^m 
+    \sqrt{\frac{2l + 1}{4 \pi} \frac{(l-m)!}{(l+m)!}}
+    P_l^m(\cos \theta) e^{im \phi}
+$$
+Which implies that $\dim \mathcal{H}_l = 2l + 1$. Using this normalization
+we also have an orthogonality relationship over the solid angles. In particular
+$$
+\int Y_l^m Y_{l'}^{m'} d \Omega = \delta_{mm'} \delta_{ll'}
+$$
+It's this orthonormalization condition which gives the normalization coefficient.
+We can now write down the action of the rotation on these polynomials! Just like we
+defined previously we get the following
+$$
+    P^{(l)}(R^{-1}) Y_l^m(\vec{n}) \equiv
+    Y_{l}^m(R \vec{n}) = 
+    \sum_{-l}^{l} P_{m'm} (R^{-1}) Y_l^{m'}(\vec{n})
+$$
+We can show that the inverse is needed to have a homomorphism. Recall also
+that $R^{-1} = R^t$. We can use this to find the coefficients of the rotation
+matrix by expanding two different rotations.
+
+It's much harder to show that these are irreps of $SO(3)$ but we can just trust for now.
+Importantly only $Y_l^0(\hat{z}) \ne 0$. If $W \subset \mathcal{H}_l$ is invariant
+then take $f\ne 0 \in W$ which implies
+$\exists \vec{x}$ s.t. $f(\vec{x}) \ne 0$, then $\exists R$ s.t. $R\vec{x} = \hat{z}$.
+Thus, $f(R^{-1} \vec{x})$ doesn't vanish at $\hat{z}$ which is a contradiction. Thus,
+we have shown that $Y_l^0$ is irrep?
+
+\section{Double cover implications}
+Remember that we have a double cover between $SO(3)$ and $SU(2)$.
+
+Through a bit of work we can show that for $SU(2)$ we only need two complex
+numbers to represent any element. The main constraint that we have is the
+determinant being 1 (which implies that their magnitude squared is one). Thus, 
+we are dealing with a three sphere in $\mathbb{R}^4$. Effectively, we end up
+projecting $A$ and $-A$ to the same rotation. As a result, we need to mod
+out the two identity elements to get $SO(3)$, in other words a projective 
+representation $\mathbb{R}P^3 = SO(3) = S^3 / \mathbb{Z}_2$. Thus,
+we have the following representation
+$P: SO(3) \rightarrow PGL(n, \mathbb{C}) = GL(n, \mathbb{C}) / \mathbb{Z}_2$.
+Modding this out works by "identifying" $\pm A$ (meaning that they are equivalent).
+
+We can end up considering $SU(2)$ and the quantum rotation group and $SO(3)$ the classical
+rotation group
+
+\section{Irreps of $SU(2)$}
+The fundamental rep of $SU(2)$ is 
+$$
+    P
+    \begin{pmatrix}
+        a & b \\
+        -\bar{b} & \bar{a}
+    \end{pmatrix} = 
+    \begin{pmatrix}
+        a & b \\
+        -\bar{b} & \bar{a}
+    \end{pmatrix}
+$$
+Given this representation we can extend our definition of $\mathcal{H}$ to QM.
+Let
+$V_n = \{ \text{deg } n \text{ homogenous polynomials in } z_1, z_2 \text{ over } \mathbb{C} \}$.
+We will end up $\dim V_n = n + 1$. For all odd dimensional representations we can find
+a corresponding element of $\mathcal{H}_l$ which matches up to it. These are the integer
+spin particles. However, for odd $n$ we will end up finding new representations
+which have half integer spins. We can use the various monomials of $z_1$ and $z_2$ as the
+basis for this representation. I has the following inner product which will give good
+normalization
+$$
+    \left<
+        \sum_{k=0}^n a_k z_1^k z_2^{n-k},
+        \sum_{m=0}^n b_m z_1^m z_2^{n-m}
+    \right> = \sum_{k=0}^n k! (n-k)! \bar{a}_k b_k
+$$
+With the orthonormal basis
+$$
+    \vec{\phi}_k \begin{pmatrix} z_1 \\ z_2 \end{pmatrix} =
+    \frac{z_1^k z_2^{n-k}}{\sqrt{k! (n-k)!}}
+$$
+With the following rotational action
+$$
+    P(A) \phi_k(z) = \phi_k(A^t z) = 
+    \sum_{i=0}^n P(A)_{ik} \phi_i (z)
+$$
+
+\subsection{Euler Angle Example}
+We will be going through a demo of the Euler angles to see how this works.
+To start, recall $R \in SO(3)$ can be decomposed into three different rotations
+$R = R_z(\alpha) R_y(\beta) R_z (\gamma)$. These various angles are how much the
+body attached axis changed relative to a fixed axis. There's some mathematica code
+which will help you visualize these angles
+
+\subsection{Detecting the negative sign on a full rotation}
+This is the belt example from Penrose.
+
+Start with a polarized thermal neutron. Split the beam in two ways,
+one path with continue straight while the other will be offset by 90 degrees.
+Put two reflectors along these paths such that they will collide into another beam
+splitter.
+On the upper path put a magnetic field to introduce a phase difference (say
+by $B_0 \hat{z}$). If you tune your magnetic field correctly you can get
+interference between the two paths. We specifically get the following
+$$
+    \mathcal{H}_{\text{int}} = -\vec{\mu} \cdot \vec{B} =
+    - \frac{g_n \abs*{e} \hbar}{2 m_p c} \frac{S_z}{\hbar} B_0
+$$
+Under this interaction we will get the following phase evolution
+$$
+    e^{-i \mathcal{H} T} \Ket{\pm} =
+    e^{\frac{i}{\hbar} \frac{g_n \abs*{e} B_0 T}{2m_p c} S_z} \Ket{\pm} =
+    e^{\mp i \omega \frac{T}{2}} \Ket{\pm}
+$$
+When rotating only by $2 \pi$ you will only end up rotating around phase wise
+by $\pi$ which will pick up a negative sign. Thus, we can show that we have
+half integer spins. 

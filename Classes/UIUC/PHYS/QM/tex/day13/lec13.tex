@@ -1,0 +1,192 @@
+\section{Boosts cont.}
+Def: $\Lambda \in SO(1,3)^+$ is a pure boost if for some $\vec{n}\in \mathbb{R}^3$
+(spatial) s.t. $\Lambda$ leaves the plant $\perp$ to $\vec{n}$ invariant.
+
+Last time we defined what it means to boost purely along the $\hat{x}$ axis
+in terms of the rapidity $\chi$ defined by $\frac{v}{c} = \tanh \chi$. This
+was defined using the matrix in the previous section.
+
+There is a very fast way to diagonalize this matrix by recognizing that
+$\Lambda_{\hat{x}} = \cosh \chi I_{2\times 2} + \sinh \chi \sigma_x$.
+We know how to diagonalize the Pauli matrix $\sigma_x$ due to the previous
+homework.
+
+We won't be using boosts too much but we do need it to understand the connection
+between $SO(1, 3)$ and $SL(2)$ as a double cover.
+
+Lemma:
+\begin{enumerate}
+    \item $\Lambda \in O(1, 3) \Rightarrow \Lambda^{-1} \in O(1,3)$. This is also
+        true in $SO(1,3)$ and $SO(1,3)^+$
+    \item $\Lambda \in O(1, 3) \Rightarrow \Lambda^t \in O(1,3)$. Similarly for
+        $SO(1,3)$ and $SO(1,3)^+$
+\end{enumerate}
+Thus, taking the inverse and transpose are contained within the groups and are closed.
+The first statement can be proven by realizing $\Lambda^t g \Lambda = g$ by definition
+and that the inverse exists. In addition, it's also important to realize that taking
+the inverse is a continuous map. Thus, the inverse can only map to connected components
+in the space. 
+
+Due to this the elements of the Lie groups stay in the same group. We're showing this
+because we want to prove the following
+
+Th: $\Lambda \in SO(1, 3)^+ = (\text{Boost})(\text{Rotation}) \equiv \sqrt{\Lambda \Lambda^t} U$
+Here's a sketch of the proof. Recall that complex numbers have a polar decomposition
+$z = \abs*{z} e^{i \phi}$. We can define the polar decomposition using the final part of Th.
+Importantly since $\Lambda \in SO(1,3)^+$ the product in the square root is positive
+definite which means that the square root is well defined. We now need to find what
+$U$ is. By definition $U \equiv \left(\Lambda \Lambda^t\right)^{-1/2}$. We can
+take the product $U^t U = 1$ to show that $U$ is by definition a pure rotation.
+The remaining part is to show that $\sqrt{\Lambda \Lambda^t}$ is a boost by
+the definition. To do this we need another Lemma.
+
+Lemma: If $\Lambda \in SO(1, 3)^+$ is symmetric, then if
+$\lambda$ is an eigen value of $\Lambda$ with eigen vector $v$, then
+$\frac{1}{\lambda}$ is an eiven value of $\Lambda$ with an eigen vector $gv$.
+
+Pf.
+\begin{align*}
+    \Lambda g \Lambda = g \\
+    \Lambda v = \lambda v \text{ But. } \\
+    gv = \Lambda g \Lambda v = \lambda \Lambda g v \\
+    \Downarrow \\
+    \Lambda \left(gv\right) = \frac{1}{\lambda} \left(gv\right)
+\end{align*}
+
+Another needed Lemma is
+Lemma: If $\Lambda \in SO(1,3)^+$ is symmetric and positive definite, then
+$\Lambda$ is a boost.
+
+Pf.
+Let $\lambda_n$ be the eigen values of $\Lambda$ with e.vecs $v_n$,
+pos. def $\Rightarrow \prod_n \lambda_n = 1$, $\lambda_n > 0$. An important
+idea to realize is that $\lambda = 1$ implies that $v$ is invariant under the action
+of this operator. Which would be an invariant subspace.
+\begin{align*}
+    v_i^t \Lambda g \Lambda v_i = v_i^t g v_i \\
+    \dots = v_{i_{\mu}}^2 \\
+    \lambda_i^2 v_{i_{\mu}}^2 = \dots \\
+    \therefore \; \left(\lambda_i^2 - 1\right) v_{i_{\mu}}^2 = 0
+    \\\Downarrow\\
+    \text{either } \lambda_i = 1 \text{ or } v_{i_{\mu}}^2 = 0
+\end{align*}
+If $\lambda_i = 1 \; \forall i$, then $\Lambda = I$.
+Otherwise, assume $\lambda_1 = \frac{1}{\lambda_2} \pm 1$
+Let $v_1 = \frac{1}{\sqrt{2}} \begin{pmatrix} 1 \\ \vec{W} \end{pmatrix}$, 
+$\lVert \vec{W} \rVert_2 = 1$. This implies that
+$v_2 = gv_1$. You can also show that the other two eigenvectors
+are perpendicular to $v_1$ and $v_2$ by imposing that $v_1^t v_2 = 0$.
+Since $\Lambda \Lambda^t$ is positive definite and symmetric is satisfies this Lemma.
+
+\section{Double Cover of $SL(2)$}
+It's this polar decomposition which allows us to show the double cover between $SO(1,3)$ and
+$SL(2)$. First let's start with a definition.
+$$
+    H_2 = \left\{ \text{ all } 2\times2 \text{ Hermitian matrices over } \mathbb{C}\right\}
+$$
+Using this definition and the properties of a Hermitian matrix we can conclude
+that the diagonals are always real and that the anti-diagonals are complex conjugates
+of each other. Using this we can then parameterize this matrix using the isomorphism
+$$
+    x \rightarrow \hat{x} = 
+    \begin{pmatrix} x_0 + x_3 & x_1 - i x_2 \\ x_1 + i x_2 & x_0 + x_3 \end{pmatrix} =
+    x_{\mu} \cdot \sigma_{\mu}
+$$
+This is a map between $\mathbb{R}^{4n}$ and $H_2$ but we would like to have a reverse
+map. We're doing this to map Lorentz transformations to the Hilbert matrix space. This
+way we can boost operators in Hilbert space for $\mathbb{R}^{4n}$
+
+Def: Frobenius inner product on $H_2$ is $\forall A, b \in H_2$,
+$\left<A, B\right>_{F} = \frac{1}{2} \text{Tr}\left(A^\dagger B\right)$
+{\color{red}(in infinite dim. this is called Hilbert-Schmidt inner product)}
+
+This inner product for the $\sigma_i$ matrices have a nice property with the
+Frobenius inner product. In particular,
+$\left<\sigma_{\mu}, \sigma_{\nu}\right> = \delta_{\mu \nu}$. It's also important to note
+that the identity matrix has been used as $\sigma_0$.
+Using this property we can actually define the reverse map between 
+$H_2 \rightarrow \mathbb{R}^{4}$.
+Using the following 
+$$
+    \hat{x} \rightarrow \left(\left<\sigma_i, \hat{x}\right>_{F}\right)
+$$
+It's this transformation on $H_2$ which allows us to relate things to Fermions
+in $H_2$.
+
+We originally defined the Lorentz transformations in terms of preserving the Minkowski
+norm. We need an equivalent in $H_2$ in order to make sure that things make sense. There
+are two things we want to preserve: $\det \hat{x} = x_{\mu}^2$, and the composition
+between Lorentz boosts (which is a homomorphism). Effectively we want the following
+
+Let $x \in \mathbb{R}^4$ and $x \rightarrow x' = \Lambda x$, where $\Lambda$ is a 
+Lorentz boost, then we want to find, 
+$A \in SL(2, \mathbb{C} = 
+\left\{ 2 \times 2 \text{ matrices over } \mathbb{C},\; \det = 1 \right\}$, s.t.
+$\hat{x'} = A \hat{x} A^\dagger$.
+
+We can show that the determinant is preserved using $\det = 1$. We also
+need to show that this is a homomorphism and what is needed to
+do this is the adjoint in $\hat{x'}$.
+
+Finally, we lso need to show that there is a unique $A$ for each Lorentz boost $\Lambda$.
+This is where we will be going next. However, we can observe that $A$ and $-A$ both
+are in $SL(2, \mathbb{C})$ and both have $\det = 1$. Thus, they are equivalent in terms
+of their action on $\hat{x}$. As a result, we have a 2-to-1 correspondance between
+$SL(2, \mathbb{C})$ and $SO(1, 3)^+$. The two covers we have of $SL(2)$ generate
+Fermions as one of the covers will produce a sign flip under it's action. This corresponds
+to the parity of Fermions.
+
+\subsection{Double cover Proof}
+Now we'll look at how this is generated by proving the following theorem
+Th: $SL(2, \mathbb{C}) / \mathbb{Z}_2 \cong SO(1, 3)^+$
+
+Lemma: 
+$e^{i \vec{n}\cdot\vec{\sigma}} = 
+\cos \theta + i \left(\vec{n}\cdot\vec{\sigma}\right) \sin \theta$, 
+where $\lVert\vec{n}\rVert_2 = 1$,
+$\vec{n} \in \mathbb{R}^3$. This comes from the involutive properties.
+
+In general what we are getting $S^3 = SU(2)$ and 
+$S^3 / \mathbb{Z}_2 = R \mathbb{P}^3 \cong SO(3)$.
+
+Lemma:
+For any $U \in U(n)$, $U = e^{i H}$, where $H = H^\dagger$.
+If $U \in SU(n) \Rightarrow U = e^{i H}$, $H = H^\dagger$, and $U$ is traceless.
+For any $H \in HPD(n)$ ($HPD$ = Hermitian positive definite), then
+$H = e^K$, $K = K^\dagger$. With a similar relationship that the $SU(n)$ has.
+
+pf.
+For $A \in SL(2, \mathbb{C})$, then we can write $A = H U$, where
+$H \in SHPD$, and $U \in SU(2)$. We can establish
+$A = \sqrt{A A^\dagger} U$ which from here it follows the same proof
+of the Lorentz polar decomposition proof. Using this $H$ corresponds to the
+boost operation while $U$ corresponds to the rotation.
+
+We need to show this though through the definitions of a rotation and a boost.
+We need a Lemma for this
+
+Lemma: Let $A \in SU(2, \mathbb{C})$, and 
+$A = e^{-\frac{i}{2} \theta \vec{n} \cdot \vec{\sigma}} =
+\cos \frac{\theta}{2} I - i \left(\vec{n}\cdot\vec{\sigma}\right) \sin \frac{\theta}{2}$.
+$A \hat{x} A^\dagger$ rotates $x$ around $\vec{n}$ by $\theta$.
+
+pf.
+The three things we need to show are the invariance of the time component, any direction
+along $\vec{n}$ is invariant, and the $\vec{b} \in \mathbb{R}^3$ ($\vec{b} \perp \vec{n}$)
+rotate around by the correct angle. In particular,
+$A \left(\vec{b} \cdot \vec{\sigma}\right) A^\dagger =
+\cos \theta \left(\vec{b} \cdot \vec{\sigma}\right) +
+\sin \theta \left(\vec{n}\times\vec{b}\right)\cdot \vec{\sigma}$
+
+Lemma: $H = e^{\frac{\gamma}{2} \vec{n} \cdot \vec{\sigma}}$
+
+pf.
+Once again there are three different things you should be showing
+\begin{enumerate}
+    \item $\vec{b} \perp \vec{n} 
+        \Rightarrow H \left(\vec{b}\cdot\vec{\sigma}\right) = \vec{b}\cdot\vec{\sigma}$
+    \item $H \left(\vec{n}\cdot\vec{\sigma}\right) H^\dagger =
+        \cosh \chi \left(\vec{n}\cdot\vec{\sigma}\right) + \sinh \chi x_0$
+    \item $H H^t = \sinh \chi \left(\vec{n}\cdot\vec{\sigma}\right) +
+        \cosh \chi \sigma_0$
+\end{enumerate}
