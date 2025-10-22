@@ -1,0 +1,238 @@
+\section{Irreducible proofs}
+Let's set the definition of
+$$
+    V_j = \text{span}\left\{ \Ket{jm} \right\}_{m=-j}^j
+$$
+The central question for now is
+"Why is this space irreducible under $so(2)$ action?"
+This likely is to extend the homework problems and the spherical
+harmonics being irreducible representations of $SO(3)$.
+
+"In graduate school you should question what you learn" since none of us
+thought about this question before. The technique
+he's going to talk about is generalizable for any highest weight
+representation.
+
+\subsection{Example technique}
+Suppose that $V_j = V \oplus W$. 
+\begin{definition}[Direct Sum]
+\label{directSum}
+"Any vector in the total space can be written as the sum of two vectors from the
+various subspaces". Both of these must only intersect at the origin
+\end{definition}
+
+\begin{definition}[Quotient Space]
+\label{quotientSpace}
+This is denoted by $\mathbb{R}^2 / \mathbb{R}$ being the quotient
+space between $\mathbb{R}^2$ and $\mathbb{R}$ or $\mathbb{R}$ is modded out.
+This idea also needs the idea of equivalence classes. In general though,
+the quotient space means that $a \sim b$ if $a-b \in W$ are equivalent
+in the space $V/W$.
+\end{definition}
+
+\begin{definition}[Equivalence Class]
+\label{equivalenceClass}
+There are three different properties that the equivalence classes must satisfy
+\begin{enumerate}
+    \item $a \sim a$, meaning $a$ is related to itself
+    \item $a \sim b \Leftrightarrow b \sim a$
+    \item $a \sim b$, $b \sim c$ implies $a \sim c$, transitive properties
+\end{enumerate}
+\end{definition}
+
+Continuing on from these definitions, lets say $u = \sum_m a_m \Ket{jm} \in V$ and we can
+order these according to the largest $m$ that has a non-zero coefficient, denoted $M$.
+We're going to act on this state with $J_-$. By definition this will lower $m$ by one
+and remove one of the states. We can then operate on this 
+$J_-^{M+j}$ times which will give you the $\Ket{j -j}$ state. Similarly you can show that
+$W$ must also contain this state which is \underline{not the origin}. Thus, these
+two spaces are related and thus, not indept. From this $V_j$ must be invariant.
+
+\section{Density matrix}
+Recall the definition of the density matrix $\rho$ as a 
+Hermitian, positive semi-definite operator $\rho: \mathcal{H} \rightarrow \mathcal{H}$,
+s.t. $\tr(\rho) = 1$
+
+\begin{definition}[Incoherent density matrix]
+\label{incoherentDM}
+Let $\left\{\Ket{\phi_n}\right\}$ be an o.n. basis of $\mathcal{H}$.
+If $\rho = \sum_{k=1}^{N} w_k \Ket{\phi_{i_k}} \Bra{\phi_{i_k}}$, then
+we say $\rho$ is \underline{incoherent}, in this basis. Otherwise
+we say $\rho$ is coherent.
+\end{definition}
+
+This coherence is \underline{not the same} as the coherent state 
+from the simple harmonic oscillator. In this case coherence
+is referring to the relative phase between the two states being fixed and known.
+
+Let's say that
+$$
+\Ket{\psi} = \sum_n \abs*{c_N} e^{i \phi_n} \Ket{\psi_n}
+$$
+and let's do an experiment of how the density matrix will look with this
+setup
+$$
+    \rho = \Ket{\psi} \Bra{\psi} = \sum_{n,m}
+        \abs*{c_n}\abs*{c_m} e^{i (\phi_n - \phi_m)}
+        \Ket{\psi_n} \Bra{\psi_m}
+$$
+Say that this prepared state had some interactions with the environment.
+In this case the phase factor between the states will be shifted. As a result
+the phase will average out to zero in an experiment. This means that for experimental
+setups the off diagonal elements will end up disappearing. This is known as a
+\underline{decoherence} problem and comes up quite a bit in QIS. This can
+also happen if the energy states have a little bit of uncertainty over time on them
+
+We also mentioned on monday that there is a many to one relationship between the setup
+of an experiment and the density matrix. Such as
+the density state:
+$$
+    \rho = \frac{1}{2} \Ket{+}\Bra{+} + \frac{1}{2} \Ket{-}\Bra{-}
+$$
+can have a unitary transform applied to it without affecting the density matrix.
+Similarly we can have an isotropic distribution of spins which will
+result in the exact same density matrix
+
+\subsection{Von Neumann Entropy}
+This is the "entropy" of your density matrix. We will be denoting
+entropy as $S(\rho)$. You can think of this entropy in a typical
+way of "disorder". However, you can also view this
+as "how much information you can gain by doing an experiment".
+
+With a high certainty prediction, "the sun will rise", an experiment
+will not give you much information by doing that experiment. Effectively
+common events do not give you more information. As a result you'd
+expect a measurement's information density to be additive and
+be related to $1/\mathbb{P}$. We can build the additive property
+by using a logarithm. We can use this to construct an average amount of information
+given using Shannon Entropy
+\begin{definition}[Shannon Entropy]
+\label{shannon}
+This is defined by
+$$
+    \text{expected information} = -\sum_i \mathbb{P}_i \log \mathbb{P}_i
+$$
+where we are summing over all possible outcomes
+\end{definition}
+
+We can build the Von Neumann Entropy related to the Shannon entropy but
+accounting for the mixture of the system.
+\begin{definition}[Von Neumann Entropy]
+\label{vonNeumann}
+This is heavily related to Shannon Entropy but has the definition from
+the density matrix $\rho$ of
+$$
+    S(\rho) = - \tr \left(\rho \log \rho\right) =
+    - \sum_k D_{kk} \log D_{kk}
+$$
+where $\rho = V D V^\dagger$. This relies on the density matrix being diagonalizable
+\end{definition}
+In the problem set we need to be careful in construction of the
+density matrix because we don't have an orthonormal set. So be careful
+
+\begin{corollary}
+$S(\rho) = 0$ iff $\rho$ is pure. This is relatively straight forward
+from one eigenvalue being non-zero and the rest being zero. As implies
+from the pure state.
+\end{corollary}
+
+Suppose that $\left\{\Ket{\psi_n}\right\}$ is an orthognormal set.
+If $\rho = \sum_{n=1}^{N} w_n \Ket{\psi_n} \Bra{\psi_n}$, and
+$\sum_{n=1}^N w_n = 1$. For which 
+$\left\{w_N\right\}$, is $S(\rho$ maximized? It will end up being
+the uniform distribution! We can show this using Lagrangian mechanics
+and some derivatives. 
+
+\subsection{Evolution of Density Matrices}
+People call the density matrix an "operator" but it's not really
+an observable of the Hilbert space. The reason is how it evolves in time.
+We can use the unitary time evolution operator. In the Schr\"odinger
+picture we can just evolve the states getting
+$\rho(t) = U(t) \Ket{\psi, 0}\Bra{\psi, 0} U(t)^\dagger$
+but in the Heisenberg picture
+$\rho = U(t) \rho U^\dagger(t)$. But this doesn't match
+up with what we're getting from the Schr\"odinger picture.
+As a result the density operator \underline{does not evolve in 
+the Heisenberg picture}. In other words
+$\rho_H (t) = \Ket{\psi, 0}\Bra{\psi, 0}$.
+
+As a result the density matrix commutes with the
+Hamiltonian and we can simultaneously diagonalize the density
+matrix and the Hamiltonian. So we can diagonaliz $\rho$ in the
+energy eigenbasis. This builds up to quantum statistical mechanics!
+The question we now want to answer is "what does this matrix
+look like".
+
+One way we can do this is by fixing the mean energy of the
+system $\mathcal{E} = \left[H\right] = \tr \left(\rho H\right)$
+and see how the entropy can be maximized.
+\begin{gather*}
+    \mathcal{L} = - \tr \left(\rho \log \rho\right) +
+        \alpha \left(\rho_{kk} - 1\right) -
+        \beta \left(\tr \left(\rho H\right) - \mathcal{E}\right) \\
+    \diff{{\mathcal{L}}}{{\rho_{kk}}} = - \log \rho_{kk} - 1 
+        + \alpha - \beta E_k = 0 \\\Downarrow\\
+    \rho_{kk} = e^{\alpha - 1 - \beta E_k} \\\Downarrow\\
+    \rho_{kk} = \frac{e^{-\beta E_k}}{\sum_k e^{-\beta E_k}}
+\end{gather*}
+Overall the result we can show that the form of the density matrix is
+$$
+    \rho = \frac{e^{-\beta H}}{\tr \left(e^{-\beta H}\right)}
+$$
+
+\subsection{Central Force Problems}
+We need this kind of formalism in order to discuss the Hydrogen atoms problem in the
+homework set. A few weeks ago we derived the angular momentum to be the
+same as the classical definition, $\vec{L} = \vec{x} \times \vec{p}$. Using this
+we can get the following for the $L_z$ operator.
+$L_z = -i \hbar \left(x \diffp{}{y} - y \diffp{}{x}\right) = -i \hbar \diffp{}{\phi}$.
+We would like to use spherical coordinates to break the radial components from the
+angular components. Which better match our problems. Similarly
+$$
+    L^2 = \vec{L} \cdot \vec{L} = -\hbar^2
+        \left[\frac{1}{\sin \theta} \diffp{}{\theta} \sin \theta \diffp{}{\theta}
+        + \frac{1}{\sin^2 \theta} \diffp[2]{}{\phi}\right]    
+$$
+Recall that in the Hamiltonian we have $-\nabla^2$ which will give
+an angular momentum barriers to areas close to the origin. This is
+why the radial solutions tend to be "pushed" away from the origin.
+
+In general with a very heavy nucleus we can model the Hammiltonian
+using a purely radial potential. I.E. 
+$H = \frac{\vec{p}^2}{2m} + V(r)$, and $r = \sqrt{\vec{x}^2}$. In
+order to find the spectrum we need to look at the symmetry of the problem.
+We can do this by looking at the commutators with the generators of
+rotation, $L$. Thus,
+\begin{gather*}
+    \left[\vec{L}, \vec{p}^2\right] = \left[\vec{x}\times\vec{p}, \vec{p}^2\right] \\
+    = \left[\left(\vec{x} \vec{p}^2\right) - \vec{p}^2 \vec{x}\right] \times \vec{p} \\
+    = \left(\left[\vec{x}, \vec{p}^2\right]\right) \times \vec{p} \\
+    = i \hbar \vec{p} \times \vec{p} =0
+\end{gather*}
+Similarly $\left[\vec{L}, \vec{x}^2\right] = 0 \Rightarrow \left[\vec{L}, f(r)\right] = 0$.
+Thus, we have a symmetry in $\left[\vec{L}, H\right] = 0$. Even though the entire
+vector does commute, the individual components do not commute. So we need to choose
+a "maximally commuting set" which we will simultaneously diagonalize. By convension
+we are going to choose $L_z$, $L^2$, and $H$. We choose $L_z$ because it has
+a simple form when written as a differential equation. We can then
+seperate the differential equation in to the radial and angular components. In
+particular we know that the radial solutions should be the spherical harmonics since
+they were constructed to be the eigenbasis of $L_z$ and $L^2$.
+Then we can have $\Psi(\vec{x}) = R_n(r) Y_l^m(\theta, \phi)$.
+
+At this point this reduces to a classical mechanics effective potential problem
+in the radial case. We can use a specific potential which for the hydrogen atom
+this if $-Z e^2 /r$. Importantly we can do a type of asymptotic analysis to give
+us a direction for what kinds of solutions would work. 
+
+In the case $\abs*{V} \ll r^{-2}$
+as $r \to 0$, then there are two solutions
+$U(r) \propto A r^{l+1} + B r^{-l}$. This comes from the potential term being
+dropped as it is small relative to the potential barrier at the origin
+
+In the opposite case, as $r \to \infty$,
+if $V(r) \to 0$, then the potential terms are small relative to $E_n$.
+In this case we end up with solutions along the lines of
+$U \propto A e^{-\kappa r} + B e^{\kappa r}$. Whever $\kappa = - \frac{2m E_n}{\hbar^2} > 0$.
+We can then redefine $U = \eta^{l + 1} e^{-\eta /2} \omega(\eta)$ where
+$\eta = 2 \kappa r$.

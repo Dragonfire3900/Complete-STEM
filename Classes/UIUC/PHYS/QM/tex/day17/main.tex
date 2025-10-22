@@ -1,0 +1,76 @@
+\documentclass[12pt]{article}
+
+\usepackage{tikz}
+
+\usepackage{mdframed}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsbsy}
+\usepackage{amsthm}
+\usepackage[nomath]{stix}
+\usepackage{bbm}
+\usepackage{comment}
+\usepackage{braket}
+\usepackage{mathtools}
+\usepackage{esdiff}
+
+\newcounter{hwProblem}
+\newcounter{hwPart}[hwProblem]
+\setcounter{hwProblem}{1}
+
+\providetoggle{showPrompts}
+\settoggle{showPrompts}{true}
+
+\mdfdefinestyle{hwPromptBox}{linecolor=blue}
+
+\newenvironment{hwProblem}[2][-1]{
+    \ifnum #1>0
+        \section*{Problem \arabic{hwProblem} ({\it #1 pts.}): #2}
+    \else
+        \section*{Problem \arabic{hwProblem}: #2}
+    \fi
+    \stepcounter{hwProblem}
+
+    %Defining what a problem part is
+    \newenvironment{hwPart}[2][-1]{
+        \stepcounter{hwPart}
+        \ifnum##1>0
+        \subsubsection*{Part \Alph{hwPart} ({\it ##1 points}): ##2}
+        \else
+        \subsubsection*{Part \Alph{hwPart}: ##2}
+        \fi
+
+    }{}
+    
+    \iftoggle{showPrompts}{
+        \newenvironment{hwPrompt}{
+            \begin{mdframed}[style=hwPromptBox]
+        }{\end{mdframed}}
+    }{
+        \excludecomment{hwPrompt}
+    }
+}{}
+
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclareMathOperator{\tr}{tr}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\includecomment{pbStatement}
+\includecomment{longform}
+
+\title{Lecture Day \#17}
+\author{Joel Kelsey}
+\date{10-22-2025}
+
+\begin{document}
+\maketitle
+
+\input{lec17}
+\end{document}
