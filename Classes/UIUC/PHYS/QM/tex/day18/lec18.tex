@@ -1,0 +1,240 @@
+\section{Solutions to a radial potential}
+Specifically to the equation
+$$
+    \left(\frac{\vec{p}^2}{2m} + V(r)\right) \psi = E_n \psi
+$$
+We ended up finding the following solution last class by trying this \newline
+$\psi = R_{nl}(r) Y^{m}_{l}\left(\theta, \phi\right)$ and let
+$R_{nl}(r) = \frac{U_{nl}(r)}{r}$. Along with this we found
+$u = \eta^{l+1} e^{\eta/2} \omega(\eta)$, where
+$\eta = 2 \kappa r$, where $\kappa^2 = -2mE_n / \hbar^2 > 0$
+and $\omega_{nl}$ satisfies
+$$
+    \omega'' + \left(\frac{2l+2}{\eta} - 1\right) \omega' +
+    \left[\frac{V}{2E_n} - \frac{\left(l+1\right)}{\eta}\right] \omega
+$$
+We now want to solve this potential for something that corresponds
+to the hydrogen atom. Being $V = -Ze^2 / r = -2 Z e^2 \kappa / \eta$.
+This simplifies the DE for $\omega$ into
+$$
+    \eta \omega'' + \left(2l+1 + 1 -\eta\right) \omega' +
+    \left[\frac{-Z e^2 \kappa}{2E} - (l+1)\right] \omega =0
+$$
+This has a regular and unique solution if $N \in \mathbb{Z}_{\ge 0}$ and
+builds up solutions of the Associated Laguere polynomials of
+$\omega(\eta) = L_{N}^{2l+1}$. Which can be looked up from various tables.
+This overall process comes from a solution to the Strum-Louiville DEs.
+We can solve for $E_n$ in terms of $N$ and get the following
+$$
+    E_n = - \left(\frac{Z e^2 \sqrt{2m}}{2\hbar \left(N + l + 1\right)}\right),
+    \; n = N + l + 1
+$$
+This gives a constraint on the various values of $l$ by pointing out that
+$l = 0, \dots, n - 1$. We can also solve for the degeneracy of this setup
+by $\sum_{l=0}^{n-1} 2l + 1 = n^2$. We aren't expecting this to just be
+$n^2$ and indicates that there must be some kind of symmetry we are not
+expecting. We will come back to this in Chapter 4 but there is another
+classical symmetry that we didn't take into account which produces this
+degeneracy
+
+This is one of the few systems which we can explicitly calculate the spectrum of.
+This is quite rare as there are only a few systems which have these explicit spectra.
+So it's quite cool overall! We also mostly will use these setups
+to produce solutions using perturbation theory.
+
+\section{Tensor Products}
+We can construct entaglement using tensory products. We'll be going over how this
+can be constructed using this setup. 
+\begin{definition}[Cartesian Product]
+\label{cartProd}
+The cartesian product of two vector spaces $V$ and $W$ are all sets s.t.
+$$
+    V \times W = \left\{(v, w) | v \in V,\; w\in W\right\}
+$$
+\end{definition}
+
+We want to obtain a vector space from the cartesian product of two vector spaces. In
+order to do this we need to define how the various operations on a normal vector space works.
+One way to do this is by using element wise definitions which produces a
+{\color{red} product space}. This would be illustrated via the following properties
+\begin{enumerate}
+    \item $\left(v_1, w_1\right) + \left(v_2, w_2\right) = \left(v_1 + v_2, w_1 + w_2\right)$
+    \item $\forall k \in \mathbb{C}$, with
+        $k (v, w) = (kv, kw)$.
+\end{enumerate}
+This builds up the product space.
+We can find the dimension of this space to be
+$\dim \left(V \times W\right) = \dim(V) + \dim(W)$
+
+With a tensor product we can extend this
+by imposing additional algebraic structure. In particular,
+we want to impose a bilinearity condition in the first and second arguments.
+\begin{enumerate}
+    \item $\left(\alpha v_1 + \beta v_2, w\right) \equiv
+        \alpha \left(v_1, w\right) + \beta \left(v_2, w\right)$ and similarly
+        for the second argument
+\end{enumerate}
+Interestingly if have the second argument being zero then the overall vector
+must be multiplied by zero and thus, be the zero vector. We will denote
+spaces which have this property as
+$(v, w) = v \otimes w$.
+
+With this additional structure the overall dimensionality will be multiplicative instead
+of additive. This is because,
+if $\left\{e_i\right\}$ and $\left\{f_i\right\}$ are bases of $V_1$ and $V_2$, then
+$\left\{e_i \otimes f_i\right\}$ is the basis of $V_1 \otimes V_2$.
+This is also where the kronecker product defines the tensor product. Explicitly
+any vector can be written as
+$\left(\sum a_i e_i\right) \otimes \left(\sum b_j f_j\right) =
+\sum_{i,j} a_i b_j \left(e_i \otimes f_j\right)$
+
+In theory we've actually already seen this type of space! We actually use this
+structure when describing the linear maps between two vector spaces.
+In particular we claim
+$$
+\mathcal{L} \left(V, W\right) = \left\{\text{linear maps }M: V \rightarrow W\right\} =
+    W \otimes V^{*}
+$$
+Where $V^{*}$ indicates the dual space of $V$.
+
+\subsection{Representing linear maps in some basis}
+In a vector space once, we've set the basis vectors we can represent
+all of the linear maps between these spaces. In particular, we can do
+this via the Kronecker product
+\begin{definition}[Kronecker Product]
+\label{kronProd}
+Given two vectors $v = \begin{pmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{pmatrix}$, and
+$w = \begin{pmatrix} w_1 \\ \vdots \\ w_m \end{pmatrix}$ we can define the tensor
+product as
+$$
+    v \otimes w = \begin{pmatrix}
+        v_1 w \\
+        v_2 w \\
+        \vdots \\
+        v_n w
+    \end{pmatrix} =
+    \begin{pmatrix}
+        v_1 w_1 \\
+        v_1 w_2 \\
+        \vdots \\
+        v_n w_m
+    \end{pmatrix}
+$$
+\end{definition}
+We can also investigate how various operators combine within this notation. Say
+that we were given four different operators paired across two different
+vector spaces. We can establish that
+$\left(A \otimes B\right) \left(v \otimes w\right) \equiv A v \otimes B w$.
+Thus we end up with
+$\left(C \otimes D\right) \left(A \otimes B\right) \equiv
+CA \otimes DB$
+We can also build up the Kronecker product for linear maps which has
+a very similar form to how vectors combine.
+
+An important piece of notation that we will use is
+$\vec{\sigma}_1 \cdot \vec{\sigma}_2 \equiv
+\sum_{i} \sigma_{i1} \otimes \sigma_{i2}$
+
+\subsection{Decomposing tensor products}
+In general, when taking tensory products between the states of two particles
+you will not get an irreducible representation of your system. This is unless,
+your particle is one dimensional. We would like to know how to decompose these
+representaitons into an irreducible representaiton of the two particle systems.
+
+Let's define $\rho_1 : G \rightarrow GL(n, \mathbb{C})$ and
+$\rho_2 : G \rightarrow GL(m, \mathbb{C})$ as two representations
+in two vector spaces. We can find the tensor product as
+$\left(\rho_1 \otimes \rho_2\right)(g) \equiv \rho_1(g) \otimes \rho_2(g)$
+and claim that this is a homomorphism. In other words, this is a representation
+on $\mathbb{C}^n \otimes \mathbb{C}^m$. This mainly works
+because $\rho_i$ are representations of $G$ in their repsective vector space.
+
+\subsubsection{Example: Spin-$1/2$ decomposition}
+Let's say we have the vector space $V = \left\{\Ket{\pm}\right\} \otimes 
+\left\{\Ket{\pm}\right\}$. We will claim that $V = V_0 \oplus V_1$, where
+$V_0 = \left\{\Ket{+-} - \Ket{-+}\right\}$ and 
+$V_1$ is orthogonal to $V_0$, i.e.
+$V_1 = \left\{\Ket{++}, \Ket{+-} + \Ket{-+}, \Ket{--}\right\}$.
+We need to show that these bases are invariant under rotation in order to
+show that they are irreducible representations. We can show this
+using a "brute force" method where we apply the representaiton of rotation
+onto the basis vectors.
+
+Let's see how we can do this using antisymmetric tensors. Let's say that
+$V_{ij} = -V_{ji}$. Then the action of $\rho$ will be
+$V_{ij} \rightarrow \rho_k^i \rho_l^j V_{ij}$. Which there can only
+be one linear invariant combination which is antisymmetric. We can then
+analyze the symmetric portions of the space.
+
+\section{Adding momenta}
+Using this tensor product setup we can now analyze the addition
+of the various momentums and how they add. In particular, we
+want to represent the action of the entire momentum
+using the tensor product on two different particles
+$\rho \left( e^{- \frac{i}{\hbar} \vec{S} \cdot \hat{n} \theta}\right) =
+\rho_1 \left(e^{- \frac{i}{\hbar} \vec{S}\cdot \hat{n} \theta}\right) 
+\otimes \rho_2 \left(\dots\right)$. For small $\theta$ we will end up with
+$\vec{J} = \vec{J}_1 \otimes 1 + 1 \otimes \vec{J}_2$. Similarly we can
+find the form of $\vec{J}^2$ by accounting for the various
+cross terms. Which ends up being
+$\vec{J}^2 = \vec{J}_1^2 \otimes 1 +
+1 \otimes \vec{J}_2^2 + 2 \left(\vec{J}_1 \otimes \vec{J}_2\right)$. We will
+use a slight abuse of notation by dropping out the $1$ terms and implicitly know
+that we are working in two different vector spaces.
+We can manipulate the final term to be
+$2 \left(\vec{J}_1 \otimes \vec{J}_2\right) =
+2 J_{1z} \otimes J_{2z} + J_{1+} \otimes J_{2-} +
+J_{1-} \otimes J_{2+}$
+
+Using this we can then construct the various commutation relationships
+in order to who the relationship between the various states. We end up
+with the following
+\begin{enumerate}
+    \item $\left[J^2, \vec{J}\right] = 0$
+    \item $J^2 \left(\Ket{+-} - \Ket{-+}\right) = 0$
+    \item $J^2 \Ket{++} = 2 \hbar^2 \Ket{++}$
+    \item $J_- \Ket{++} = \hbar \left(\Ket{-+} + \Ket{+-}\right) = 2\hbar^2 \dots$
+\end{enumerate}
+
+\section{Extending to infinite dimensions}
+We now can extend the notion of tensor product to infinite dimensions
+and to Hilbert spaces. This will give us a definition of entangeled states
+\begin{definition}[Entangled State]
+\label{entangledState}
+If $\Ket{\psi} \in \mathcal{H}_A \otimes \mathcal{H}_B$, then we say
+$\Ket{\psi}$ is entangled if $\Ket{\psi} \ne \Ket{\phi} \otimes \Ket{\eta}$,
+for $\Ket{\phi} \in \mathcal{H}_A$ and $\Ket{\eta} \in \mathcal{H}_B$
+\end{definition}
+Effectively that the entangled states are irreducible states.
+
+\begin{theorem}[Reduced Density Matrix Entanglement]
+\label{redDensityMatrix}
+Let $\rho_A = \tr \left(\Ket{\psi}\Bra{\psi}\right)$, and
+$\rho_B = \tr_A \left(\Ket{\psi}\Bra{\psi}\right)$ be the reduced density matrices.
+$\Ket{\psi}$ is entangled iff $S(\rho_A) = S(\rho_B) \ne 0$.
+\end{theorem}
+
+\subsection{Singular Value Decomposition}
+Given $M \in \mathbb{C}^{n \times m}$, $MM^\dagger$ and $M^\dagger M$ are
+Hermitian positive semi-definite matrices. These matrices can be diagonalized
+to find their eigenvalues and vectors.
+$MM^\dagger = V D V^\dagger$, where $VV^\dagger = I$ and $D$ is a diagonal
+matrix with $N$ non-zero diagonal elements $\left\{\sigma_i\right\}_{i=1}^{N}$.
+Similarly $M^\dagger M = U \tilde{D} U^\dagger$. Where $\tilde{D}$ will have the same
+set of non-zero diagonal entries. The singular value decomposition of $M$ is
+$M = U D V^\dagger = \sum_{i = 1}^{N} \sigma_i u_i v_i^t$. The number $N$ is called
+the "rank" of the matrix.
+
+We can then extend this definition to infinite dimensional spaces where we truncate
+the sum up to the rank of the decomposition. This is also called the
+{\color{red} Schmidtt decomposition}.
+
+We can then represent a single state as
+$\Ket{\psi} = \sum_{n,m} M_{nm} \Ket{\phi_n} \otimes \Ket{\eta_m} =
+\sum_{k} \sigma_k \Ket{\tilde{\phi}_k} \otimes \Ket{\tilde{\eta}_k}$
+If we have a normalizable state then $\Braket{\psi | \psi} = 1 \Rightarrow
+\sum_k \sigma_k^2 = 1$. Which gives the partial trace equivalence as in 
+\ref{redDensityMatrix}. In particular we get
+$\rho_A = \tr_B \Ket{\psi}\Bra{\psi} = \sum_k \sigma_k^2 
+\Ket{\tilde{\phi}_k}\Bra{\tilde{\phi}_k}$, and
+$\rho_B = \tr_A \dots$
