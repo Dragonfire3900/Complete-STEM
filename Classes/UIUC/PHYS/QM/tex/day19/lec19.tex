@@ -1,0 +1,123 @@
+\section{Review of Lecture 18}
+Let $\mathcal{H}_A$ and $\mathcal{H}_B$ be Hilbert spaces with 
+an o.n. bases $\left\{\phi_n\right\}$ and $\left\{\eta_m\right\}$, respectively.
+Then for any $\Ket{\psi} \in \mathcal{H}_A \otimes \mathcal{H}_B$,
+$$
+    \Ket{\psi} =
+    \sum_{n,m} M_{nm} \Ket{\phi_n} \otimes \Ket{\eta_m}
+$$
+The fundamental question we have is: "Are these states entangled?"
+which is the main thing we answered last time. Mainly through the following
+theorem
+\begin{theorem}[Entangled States]
+\label{entanglesStates}
+$\Ket{\psi}$ is entangled iff
+$$
+    S (\rho_A) = S(\rho_B) \ne 0
+$$
+Under singular value decomposition with
+$S(\rho) = \sum_{k=1}^{N} - \sigma_k^2 \log \sigma_k^2$
+\end{theorem}
+One important thing to realize is that SVD representations are the same
+under unitary transformations. Thus, the singular values are invariant
+but the left and right decompositions can be transformed by a unitary operator
+and be the same. As a note the infinite dimensional version of SVD
+is {\color{red} Schmidt decomposition}. 
+
+\subsection{Example: Partial Trace}
+Let's start with the following Bell state
+$\Ket{\psi} = \frac{1}{\sqrt{2}} \left(\Ket{+-} - \Ket{-+}\right)$.
+First we need to compute the overall desity matrix,
+$\rho_{AB} = \Ket{\psi}\Bra{\psi} = \frac{1}{2} 
+\left(\Ket{+-} - \Ket{-+}\right)\left(\Bra{+-} - \Bra{-+}\right)$
+We can then find the partial trace of $A$ to be
+$\rho_B = \tr_A (\rho_{AB}) = \frac{1}{2} \left(\Ket{+}\Bra{+} + \Ket{-}\Bra{-}\right)$
+
+With this we've wrapped up the density matrices and spins
+
+\section{Adding Angular momentum}
+The essential idea we are wanting to address is how the tensor product of two
+different sping states can be decomposed into the direct sum of additional states
+\begin{theorem}[Angular Momentum Decomposition]
+\label{angDecomp}
+Say we had two different spin states $V_{j_1}$ and $V_{j_2}$. The theorem is
+$$
+V_{j_1} \otimes V_{j_2} =
+    V_{j_1 + j_2} \oplus V_{j_1 + j_2 - 1} \oplus \dots \oplus
+    V_{\abs{j_1 - j_2}}
+$$
+\end{theorem}
+This theorem will give us the Clebsh-Gordan coefficients. This requires a process to
+show that you can get individual points in the tensor product space of $V_{j_1}$ and $V_{j_2}$.
+We can construct individual diagonal elements by applying $J_{\pm}$ to the heighest weight
+state. However after applying this once there are is another valid state which is orthogonal
+to the result of $J_{-} V_{j_1 + j_2}$. This turns out to be the $V_{j_1 + j_2 - 1}$ 
+space. We can see this by analyzing the orthogonality between this result and the other
+parts of the space. We can then further construct the additional parts of the space by
+looking at the orthogonality.
+
+In order to do this we also need a convention in how we write our results and we
+have the following (based on an old committee at some point)
+\begin{enumerate}
+    \item $J_{\pm}$ must have non-negative matrix elements. Which gives \newline
+        $J_{\pm} \Ket{j m} = \hbar \sqrt{\left((j\mp m) (j\pm m - 1)\right)}
+        \Ket{j m\pm 1}$
+    \item $\Braket{J=j, M=j | j_1, j_2; m_1 = j_1, m_2 = j - j_1} > 0$. In other
+        words if $m_1$ is the top value this term must be positive.
+\end{enumerate}
+
+\section{Clebsh Gordon Coefficients}
+\subsection{Example Compute the Clebsh Gordon Coefficients}
+There's a lot that I didn't really get to record properly but we can write out the individual
+terms present in \ref{angDecomp}
+
+\section{Adding Orbital and Spin}
+We can write down $J = L + S$ which ends up adding the two forms of 
+angular momentum. In this case we can represent the entire vector space they build
+with the tensor product between $V_L$ and $V_S$. In the case that $S = 1/2$
+we can then use \ref{angDecom} to uniquely construct the state. In particular
+starting with the top state we can define
+$$
+    \Ket{J = l + \frac{1}{2}; M = l + \frac{1}{2}} = \Ket{l, \frac{1}{2}; l, \frac{1}{2}}
+$$
+Using this and the previously established conventions we can derive the general states to be
+the following (which can also be represented 
+using spinor notation which is also available in Sakari)
+\begin{enumerate}
+    \item $\Ket{J = l + \frac{1}{2}; m}$
+    \item $\Ket{J = l - \frac{1}{2}; m}$
+\end{enumerate}
+{\color{red}Both of these are present in Sakari}. We are working towards establishing
+the Wignar-Ekhardt theorem.
+
+\section{Operator transformation under rotation}
+A little bit ago we showed that the spin rotates like a vector. This also
+applies for the general angular momentum components. In other words
+$$
+\mathcal{D}^\dagger(R) \vec{J} \mathcal{D}(R) = R \vec{J}
+$$
+We can also look at any general vectoral quantity and see how this
+must transform. To be more specific let's say we have $\vec{V}$ with elements
+$v_i: \mathcal{H} \rightarrow \mathcal{H}$, by the definition
+this vector must satisfy
+$\Bra{\psi} \vec{V} \Ket{\psi} \rightarrow R \Bra{\psi} \vec{V} \Ket{\psi}$.
+This will result in the following operator identity
+$$
+\mathcal{D}^\dagger (R) \vec{V} \mathcal{D} = R \vec{V}
+$$
+Recalling that $\mathcal{D}(R)$ is found via the exponential of various generators
+we can look at how $\vec{V}$ changes under rotation by expanding either side
+in the small angle approximation. We know from problem set \#1 how vectors should
+transform under rotation. We then can match the various terms together in order to find
+the commutation relation of
+$$
+    \left[J_a, V_b\right] = i \hbar \epsilon_{abc} V_c
+$$
+We can then start looking at higher order rotations using the spherical harmonics as
+as basis. In particular we can look at how the spherical harmonics rotate (of $l>1$)
+in order to describe how higher order tensors will rotate. In particular we must
+demand that
+$$
+\mathcal{D}^\dagger (R) Y_l^m (\vec{V}) \mathcal{D}(R) = Y_l^m (R \vec{V})
+$$
+which matches how they should rotate.
