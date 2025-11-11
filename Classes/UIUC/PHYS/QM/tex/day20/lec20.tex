@@ -1,0 +1,235 @@
+\section{Review of Lecture 19}
+Last time we started talking about vector operators and how they will transform
+under rotations. In particular we came up with the following definition
+\begin{definition}[Vector Operator]
+\label{vecOpt}
+Let $R = R_{\hat{n}, \theta} \in SO(3)$. Then, a vector operator $\vec{V}$
+transforms as
+$$
+\mathcal{D}^\dagger (R) \vec{V} \mathcal{D}(R) = R \vec{V}
+$$
+where $\mathcal{D} \approx 1 - \frac{i}{\hbar} \vec{J} \cdot \hat{n}\theta$ for
+$\abs*{\theta} \ll 1$.
+\end{definition}
+This definition also implies the commutation relationship between any vector operator
+and the generators of rotation
+\begin{theorem}[Commutation relationships]
+\label{vecOptCom}
+If $\vec{V}$ is a vector operator then is has the following commutation relation
+with the generators of rotation
+$$
+    \left[J_a, V_b\right] = i\hbar \epsilon_{abc} V_C
+$$
+\end{theorem}
+
+\section{Cartesian Tensors}
+We also decomposed the tensor products into direct sums of different vector spaces.
+In particular we had the result $V_1 \otimes V_1 = V_2 \oplus V_1 \oplus V_0$.
+We can use this decomposition to show how tensors within the product space
+will break into pieces.
+
+Let's say $T_{ij} = V_i U_j$ where $\vec{V}$ and $\vec{U}$ are vector operators.
+This tensor $T$ is the cartesian product of the two vectors.
+We can break this tensor into three different terms which have direct physical interpretations
+$$
+    T_{ij} = \vec{V} \cdot \vec{U}  + \epsilon_{ijk} \left(\vec{V} \times \vec{U}\right)_k
+    \left(\frac{V_i U_j + V_j U_i}{2} - \frac{\vec{V}\cdot\vec{U}}{3} \delta_{ij}\right)
+$$
+The first term corresponds to the $V_0$ space, the second the $V_1$ space, and the third
+coresponds to the $V_2$ space. Importantly the second term does not flip its sign
+under parity transformations which makes it a type of pseudo-vector. Writing things
+down in this form is a little bit cumersome so we would like a more understandable notation
+which will give spherical tensors.
+
+\section{Spherical Tensors}
+We would like to write our tensor using the "master equation" which all spherical tensors
+must satisfy.
+\begin{align*}
+\mathcal{D}^\dagger (R) Y_l^m \left(\vec{V}\right) \mathcal{D}(R) 
+    &= Y_l^m \left(R \vec{V}\right) \\
+    &= \sum_{m'} \mathcal{D}_{m'm}^{(l)} \left(R^{-1}\right) Y_l^{m'}\left(\vec{V}\right) \\
+    &= \sum_{m'} \Bar{\mathcal{D}_{m'm}^{(l)} \left(R\right)} Y_l^{m'}\left(\vec{V}\right)
+\end{align*}
+
+\subsection{Example Spherical tensors for $l=1$}
+We can typically write the spherical harmonics as follows which will give the following
+spherical harmonics
+\begin{align*}
+    Y_{1}^0 = \sqrt{\frac{3}{4 \pi}} n_z &\rightarrow&
+        T_0^{(1)} = \sqrt{\frac{3}{4 \pi}} V_z \\
+    Y_1^{\pm} = \mp \sqrt{\frac{3}{4 \pi}} \frac{n_x \pm i n_y}{\sqrt{2}} &\rightarrow&
+        T_{\pm 1}^{(1)} = \mp \sqrt{\frac{3}{4 \pi}} \frac{V_x \pm i V_y}{\sqrt{2}}
+\end{align*}
+A notational difference is setting $l=k$ and $m=q$. Previously we also looked at the Lie
+Algebra in order to figure out the matrix elements of $\mathcal{D}(R)$ and found that
+$\mathcal{D}_{qq'}^{(k)} =
+\Bra{kq} e^{- \frac{i}{\hbar} \vec{J} \cdot \hat{n} \theta} \Ket{kq'}$.
+By linearizing this definition and the LHS and RHS of the "master equation"
+we can find the following commutation relationships
+\begin{gather}
+    \left[\vec{J} \cdot \hat{n}, T_q^{(k)}\right] = \sum_{q'}
+        \Bra{kq'} \vec{J} \cdot \hat{n} \Ket{kq} T^{(k)}_{q'} \\
+    \left[J_z, T_q^{(k)}\right] = q \hbar T_q^{(k)} \\
+    \left[J_{\pm}, T_q^{(k)}\right] = \sum_{q'} \Bra{kq'} J_{\pm} \Ket{kq} T_{q'}^{(k)} =
+        \hbar \sqrt{(k\mp q) (k \pm q + 1)} T_{q\pm1}^{(k)}
+\end{gather}
+This suggests an analogy between this spherical tensor $T$ and the spin states,
+since the commutation relationship suggests that $T$ is an eigenstate of $J_z$
+with eigenvalue $q \hbar$. In addition these operators have very similar properties
+to the angular momentum of spin.
+
+We can also mimic the calculation of Clebsh-Gordon coefficients using spherical
+tensors. Specifically we know that the raising and lowering operators must have the following
+$J_{\pm} - J_{1\pm} - J_{2\pm} = 0$. Using this we can calculate the corresponding
+Clebsh-Gordon coefficients by sandwitching it between the appropriate state
+$$
+    \Bra{j',m'} J_{\pm} - J_{1\pm} - J_{2\pm} \Ket{j,k;m,q} = 0
+$$
+The spherical tensors act in a very similar way under the idea that
+$T_q^{(k)} \Ket{j,m} \approx \Ket{j,m} \otimes \Ket{k,q}$
+which suggests that the spherical tensors have a similar recursion relationship
+to the Clebsh-Gordon coefficients. There's a very similar relationship
+for $J^2$ as with the spin states. In particular
+$$
+    \sum_i \left[J_i, \left[J_i, T_q^{(k)}\right]\right] = \hbar^2 k \left(k+1\right) \Ket{kq}
+$$
+Which maps to $J^2 \Ket{kq} = \hbar^2 k \left(k+1\right) \Ket{kq}$ for spin states.
+This action largely comes from Wigner-Eckart theorem.
+
+\subsection{Wigner-Eckart Theorem}
+\begin{theorem}[Wigner-Eckart Theorem]
+\label{wigeck}
+Let $T_q^{(k)}$ be a spherical tensor operator then, the matrix elements of the spherical
+tensor between two states $\Ket{\alpha',j',m'}$ and $\Ket{\alpha,j,m}$ with additional
+quantum numbers $\alpha$ and $\alpha'$ is
+$$
+    \Bra{\alpha',j',m'} T_q^{(k)} \Ket{\alpha,j,m} =
+        \Braket{j,k;m,q | j,k;J=j',M=m'} \times
+        \frac{\left<\alpha',j' \lVert T^{(k)} \rVert \alpha, j\right>}{\sqrt{2j+1}}
+$$
+The value of $\left<\alpha',j' \lVert T^{(k)} \rVert \alpha, j\right>$ is independent
+of the value of $q$ or any particular basis. So we can evaluate it once
+\end{theorem}
+This gives us selection rules based on the Clebsh-Gordon coefficients.
+\begin{lemma}
+\label{wigeckSelection}
+We get the following selection rules for Wigner-Eckart Theorem (\ref{wigeck}).
+$\Bra{\alpha',j',m'} T_q^{(k)} \Ket{\alpha,j,m} = 0$ if 
+$j' \notin \left\{j+k, j+k-1, \dots \abs*{j-k}\right\}$ or
+$m' \neq m + q$. These come from the selection rules for the Clebsh-Gordon coefficients
+\end{lemma}
+
+\subsection{Example: Wigner Eckart Selection Rules}
+\subsubsection{Example 1}
+The first example will be finding
+$\Bra{\alpha',j',m'} T_0^{(0)} \Ket{j,m} = 
+    \Braket{j,0;m,0 | j',m'} \dots = \delta_{jj'} \delta_{mm'} \dots
+$
+
+\subsubsection{Example 2}
+The second example is to take the spin of a particle which is restricted to
+\newline
+$\left\{\Ket{s,+s}, \Ket{s, s-1}, \dots, \Ket{s, -s}\right\}$, or the span of
+$\left\{\Ket{+}, \Ket{-}\right\}$ over $\mathbb{C}$. We can construct
+any spherical tensor by seeing how the operator changes the basis elements of our space.
+In other words we can project $T_q^{(k)}$. In \ref{wigeck} the basis dependence is from the
+Clebsh-Gordon coefficients. Which means that for fixed $k$ the various spherical tensors are
+proportional to each other in this restricted space. This is why we found
+$\vec{\mu} \propto \vec{S}$ in the beginning of the course.
+
+\subsection{Projection Operators}
+Within this restricted space from example 2 due to this proportionality we must have
+some component of $\vec{V}$ along some generic spin operator $\vec{J}$. This
+results in the projection theorem
+\begin{theorem}[Projection Theorem]
+\label{wikeckProj}
+The matrix elements of $\vec{V}$ can be written as follows when within the restricted space
+$$
+    \Bra{\alpha',j,m'} V_q \Ket{\alpha,j,m} =
+    \frac{\Bra{\alpha',j,m} \vec{J} \cdot \vec{V} \Ket{\alpha,j,m}}{\hbar^2 j(j+1)}
+$$
+\end{theorem}
+
+\subsubsection{Homework \#10 Help}
+For this week's problem set we need to write out some...
+For this problem we will need the following theorem
+\begin{theorem}[Addition Theorem]
+\label{sphericalAddThm}
+Let $T^{(k_1)}$ and $T^{(k_2)}$ be spherical tensor operators. Then,
+$$
+    T^{(k)}_{q} = \sum_{q_1=-k_1}^{k_1} \sum_{q_2=-k_2}^{k_2}
+      \Braket{k_1,k_2; q_1 q_2 | kq} T_{q_1}^{(k_1)} T_{q_2}^{(k_2)}  
+$$
+where $k = k_1 + k_2$
+\end{theorem}
+
+As an example let $\vec{U}$ and $\vec{V}$ be vector operators. Then, we can find $T^{(2)}$ in
+terms of the rank 1 spherical tensors given by $\vec{U}$ and $\vec{V}$.
+See Sakari 3.469 (in the third edition) for explicit evaluations of this setup.
+
+%\chapter{Chapter 4: Symmetry}
+\section{Central Force Problem Extra Symmetry}
+Previously we showed that in the hydrogen atom there was some kind of extra symmetry
+that we couldn't account for with just the rotational symmetry. We'll dig a little bit
+deeper into the source of that here. In classical mechanics recall that
+$$
+\dot{\vec{p}} = f(r) \hat{r} \text{ in spherical coordinates}
+$$
+For the correct selection of coordinates we can see that this is a total derivative
+which greatly simplifies the problem. We can show this using the definition
+of angular momentum
+\begin{align*}
+    \dot{\vec{p}} \times \vec{L} 
+    &= f(r) \hat{r} \times \left(\vec{r} \times \vec{p}\right) \\
+    &= m \frac{f(r)}{r} \vec{r} \times \left(\vec{r} \times \dot{\vec{r}}\right) \\
+    &= \frac{m f(r)}{r} 
+        \left[
+            \vec{r} \left(\vec{r} \cdot \dot{\vec{r}}\right) - 
+            \dot{\vec{r}} \left(\vec{r} \cdot \vec{r}\right)
+        \right] \\
+    &= \frac{m f(r)}{r} \left[
+        \vec{r} \frac{1}{2} \diff{}{t} \left(\vec{r} \cdot \vec{r}\right) -
+        \dot{\vec{r}} r^2
+        \right] \\
+    &= \frac{m f(r)}{r} \left[\vec{r} r \dot{r} - \dot{\vec{r}} r^2\right] \\
+    &= m f(r) r^2 \left[
+        \frac{\dot{r} \vec{r}}{r^2} - \frac{\dot{\vec{r}}}{r}
+        \right] \\
+    &= - m f(r) r^2 \diff{}{t} \left[\frac{\vec{r}}{r}\right]
+\end{align*}
+In the case that $f(r) = -k / r^2$, then $f(r) r^2 \propto \text{const.}$ and
+$V(r) = -k / r$. In this case we get the following simplification
+$$
+    \diff{}{t} \left[ \vec{p} \times \vec{L} - m \frac{k \vec{r}}{r}\right] = 0
+$$
+This quantity $\vec{A}$ is the Laplace-Runge-Lenz vector which is conserved
+for specific central force problems. With this conserved quantity
+we have six degrees of freedom to work with. This is still in CM though and it would
+be good to have a quantized version.
+
+\section{Quantum Mechanics CFP}
+The QM analog of the Laplace-Runge-Lenze vector is the following operator
+$$
+    \vec{M} = \frac{1}{2m} \left[
+        \vec{p} \times \vec{L} - \vec{L} \times \vec{p} - \frac{Z e^2}{r} \vec{r}
+    \right]
+$$
+We also have the following exercise problems and properties
+\begin{itemize}
+    \item $\vec{M} \cdot \vec{L} = 0 = \vec{L} \cdot \vec{M}$
+    \item $M^2 = \frac{2}{m} H \left(L^2 + \hbar^2\right) + z^2 e^4$
+    \item $\left[M_a, L_b\right] = i\hbar \epsilon_{abc} M_c$
+    \item $\left[M_a, M_b\right] = -i \hbar \epsilon_{abc} \frac{2}{m} E_n L_c$
+\end{itemize}
+Up until the final commutation relationship $\vec{M}$ is a closed relationship. However,
+since the final commutation relationship depends on the energy and thus, the Hamiltonian.
+It's much easier to work with closed operators so we would like to somehow normalize this
+operator $\vec{M}$. We can fix this by redefining $\vec{M}$ into the following
+$$
+    \vec{N} = \sqrt{\frac{m}{-2 E_n}} \vec{M}
+$$
+With the following commutation relationships
+\begin{itemize}
+    \item $\left[N_i, L_j\right] = i\hbar \epsilon_{ijk}$
+    \item There is another one to write down
+\end{itemize}

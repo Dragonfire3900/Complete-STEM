@@ -5,3 +5,6 @@
 *.fdb_latexmk
 *.aux
 *.fls
+
+#Ignoring specific files
+lecs.tex

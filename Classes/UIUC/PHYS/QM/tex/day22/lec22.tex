@@ -1,0 +1,243 @@
+\section{Review of last time}
+We're going to wrap up the parity operations today. 
+Last time we described two different states
+\begin{align}
+    \Ket{1} = \frac{\Ket{S} + \Ket{A}}{\sqrt{2}} &
+    \Ket{2} = \frac{\Ket{S} - \Ket{A}}{\sqrt{2}}
+\end{align}
+With the Hamiltonian
+$$
+    H = 
+    \begin{pmatrix}
+        E_0 & -\Delta \\
+        -\Delta & E_0
+    \end{pmatrix}
+$$
+Under these the two states will oscillate together
+
+\section{Parity as a whole}
+Here we go!
+\begin{theorem}[Parity Selection Rules]
+\label{paritySelectionRules}
+If $\epsilon$ and $\mathcal{O}$ are even and odd operators under parity; i.e.
+\begin{align*}
+    \pi \epsilon \pi = \epsilon \\
+    \pi \mathcal{O} \pi = - \mathcal{O}
+\end{align*}
+then, $\Bra{\alpha} \epsilon \Ket{\beta} = 0$ if $\Ket{\alpha}$ and $\Ket{\beta}$
+have opposite parity and $\Bra{\alpha} \mathcal{O} \Ket{\beta} = 0$ if $\Ket{\alpha}$ and
+$\Ket{\beta}$ have the same parity.
+\end{theorem}
+This can be proved by showing that the inner product with these operators
+must be equal to their negative by inserting $\pi \pi$ (which is equal to one
+since $\pi$ is an involution). 
+
+This is the first selection rule which can give you the elements of various operators
+without needing to directly computing anything at all! 
+{\color{red} This can potentially save you a ton of work and you will be asked to use
+these selection rules on HW/exams!}
+
+\subsection{Example: Infinite Potential Array}
+Let's say that we have an array of delta potentials at $x = (2n+1)/2$ with $n \in \mathbb{Z}$.
+This can be treated as a sequence of particles in a box and we will call the state
+which contains the origin $\Ket{0}$ and any other state with the $n$-th box the
+$\Ket{n}$ state. Since each of the boxes are equivalent they have the
+same energy, $H \Ket{n} = E_0 \Ket{n}$. However, this setup has a 
+translational symmetry which means that $\Ket{n}$ is not an eigenstate of
+$T(\alpha)$. We can construct an eigenstate though using the definition
+$$
+    \Ket{\theta} = \sum_{n=-\infty}^{\infty} e^{i \theta n} \Ket{n}
+$$
+We can show that under the translation operator we get the following
+$T(\alpha) \Ket{\theta} = e^{-i \theta} \Ket{\theta}$. Which means that we can construct
+simultaneous diagonalizations of $H$ and $T(\alpha)$. Under this diagonalization we can
+connect the different states using this diagonalization.
+
+Under the infinite well situation the two states do not really mix but we can relax this
+assumption. Under a finite magnitude well we will have some mixing between the bins.
+How far this mixing occurs depends on the assumptions of the crystal we make but a common
+one is the Tight-binding approximation
+\begin{definition}[Tight-binding approximation]
+\label{tightbinding}
+The tight binding approximation assumes that only neighboring cells are connected to one another
+with some split potential. In particular the Hamiltonian is
+$$
+    H \Ket{n} = E_0 \Ket{n} - \Delta \Ket{n-1} - \Delta \Ket{n+1}
+$$
+\end{definition}
+
+Under the tight-binding approximation we can calulate the energy of the
+state $\Ket{\theta}$. In particular we can find that
+$H \Ket{\theta} = (E_0 - 2 \Delta \cos(\theta)) \Ket{\theta}$. Using this setup
+we can model the motion of electrons in a lattice. However, we need a model of something
+like the plane wave solution for this setup. A physicist called "Bloch" modeled this
+situation a while ago and demanded the following requirements for the
+position representation $\Braket{x | \theta} = e^{ik x} U_k (x)$.
+First it needed to be periodic $U_k(x+a) = U_k(x)$ where
+$k = \theta / a$. Under this demand we can find the dispersion relationship
+for this "Bloch wave" being
+$$
+    E(k) = E_0 - 2 \Delta \cos \left(k a\right)
+$$
+This setup generalizes the parity operator which we've discussed before.
+
+\section{Time Reversal Symmetry}
+Notation for this type of symmetry is pretty bad if you stick to
+bra-ket notation. {\color{red}So we're going to use inner product notation instead
+of bra-ket notation.}
+
+\subsection{TR in Classical Mechanics w/ Conservative Force}
+Under this setup we can write the EOM to be
+$$
+    m \ddot{\vec{x}} = - \vec{\nabla} V
+$$
+If the potential does not depend on $t$, in this case the setup is invariant under
+time reversal. This is generally true for most systems. This is except for
+heat diffusion which is not time reversible. Over time the heat will expand outwards
+when going forward in time and shrink when going backward. This is largely
+because heat diffusion only has a single derivative with respect to time
+$$
+    \diffp{\psi}{t} = \nabla^2 \psi
+$$
+We've made an analogy to Heat diffusion from the Schrodinger equation using a Wick
+rotation. So we're going to analyze if this analogy fully works
+
+\subsection{Quantum Mechanics TR}
+Let's look at Schrodinger's equation for spinless particles. This ends up being
+$$
+    i \hbar \diffp{\psi}{t} = H \psi \left(\vec{x}, t\right)
+$$
+If we apply the operation $t \rightarrow -t$ we get a minus sign
+on the LHS. However, there is a solution. Schrodinger's equation has a complex component
+in front of the time differential. So if we take the complex conjugate we can find a
+corresponding solution which follows the same Schrodinger's equation. In particular,
+we can define a solution of $\psi_r (\vec{x}, t) \equiv \bar{\psi} (\vec{x}, -t)$
+which follows the same Schrodinger equation under time reversal. Effectively the 
+time reversal not only reverses time but also takes the complex conjugate.
+\begin{definition}[Anti-Unitary Operator]
+\label{antiUnitary}
+An operator $A$ is called anti-unitary if $\forall \psi, \phi \in \mathcal{H}$
+we have the following properties
+\begin{itemize}
+    \item $\left(A \phi, A \psi\right) = \left(\psi, \phi\right) = \bar{\left(\phi, \psi\right)}$
+        Which means that they preserve the complex conjugate of the inner product.
+    \item $A \left(c_1 \phi + c_2 \psi\right) = \bar{c}_1 A \phi + \bar{c}_2 A \psi$,
+        $\forall c_1, c_2 \in \mathbb{C}$
+\end{itemize}
+\end{definition}
+Let's look at an example of an anti-unitary operator. Let $K$ be the complex
+conjugation operator in a fixed basis. The action of $K$ on the basis $\alpha \psi$
+will be $K \left(\alpha \psi\right) = \bar{\alpha} \psi$
+where $\alpha \in \mathbb{C}$. In other words the
+complex conjugation will only affect the coefficients of the basis elements. 
+
+\begin{theorem}[Anti-Unitary Product]
+\label{antiUnitaryProduct}
+If $A$ and $B$ are anti-unitary, then $AB$ is unitary
+\end{theorem}
+We can do this by looking at $\left(AB \phi, AB \psi\right)$ and simplifying it
+using the properties of anti-unitary operators. In particular you can show that
+this is equal to $\left(\phi, \psi\right)$ which means that $AB$ is unitary.
+\begin{corollary}
+Any anti-unitary operator $A$ can be written as, $A = UK$, where
+$U$ is unitary and $K$ is the complex conjugation operator.
+\end{corollary}
+From \ref{antiUnitaryProduct} we know that $AK = U$ which we can act on by the inverse of
+$K$. Since $K$ is anti-unitary it's inverse it itself which implies that
+$A = UK$.
+
+As we mentioned earlier in order to get time-reversal we need to take the
+complex conjugate and map $t \rightarrow -t$. Motivated by this we can
+define the time reversal operator.
+Let $\Theta$ be an anti-unitary operator (time reversal operator) s.t.
+$$
+    \Ket{\psi_r, t} = \Theta \Ket{\psi, -t} = 
+    \Theta e^{\frac{i}{\hbar} H t} \Ket{\psi, 0}
+$$
+Contrary to the name what this operator does is flip the spin states and doesn't explicitly
+reverse the time. In particular, it is a solution to the Schrodinger's equation evaluated
+at $-t$. Since this state satisfies the Schrodinger equation it must evolve in the exact same
+way. In other words $\psi_r$ evolves as $\Ket{\psi_r, t} = e^{-\frac{i}{\hbar}Ht} \Ket{\psi_r, 0}$
+and thus,
+$$
+e^{-\frac{i}{\hbar} H t} \Ket{\psi_r, 0} = e^{- \frac{i}{\hbar} H t} \Theta \Ket{\psi, 0}
+$$
+Which leads to
+$$
+    \Theta e^{\frac{i}{\hbar} H t} = e^{- \frac{i}{\hbar} H t} \Theta
+$$
+for $t \ll 1$, $\Theta i H = - i H \Theta$, which means that for a linear
+time reversal operator $\left\{\Theta, H\right\} = 0$ which means that
+this operator anti-commutes with the Hamiltonian. However, this ends up being
+a problem because this setup implies that the energy is bounded from above and
+below in the same way (if one is bound so is the other and if one isn't then same with the other).
+As a result we cannot conclude that $\Theta$ must be an anti-linear operator.
+
+If $\Theta$ is anti-linear then, $\left[\Theta, H\right] = 0$. In addition, since we
+want this operator to preserve probability we can conclude that $\Theta$ must be
+an anti-unitary operator.
+
+Since $\Theta$ commutes with $H$ we can simultaneously diagonalize them. Thus, the state
+$\Theta \Ket{\psi}$ must have the same energy eigenvalue. Thus, if $\Ket{\psi}$ is a
+non-degenerate energy eigenstate, then $\Theta \Ket{\psi} = e^{i \delta} \Ket{\psi}$.
+This has some interesting consequences in justifying why the SHO states are always real,
+\begin{align*}
+    e^{-i\frac{\delta}{2}} \Theta \Ket{\psi} &= e^{i \frac{\delta}{2}} \Ket{\psi} \\
+    \Theta e^{i \frac{\delta}{2}} \Ket{\psi} &= e^{i \frac{\delta}{2}} \Ket{\psi} \\
+    \Theta \Ket{\phi} &= \Ket{\phi}
+\end{align*}
+Thus we must have a real state $\Ket{\phi}$.
+
+\subsection{Inner Product Implications}
+For any linear operator $A$, consider the inner product $\left(\psi, A \phi\right)$.
+The matrix element will typically be written as $\Bra{\psi} A \Ket{\phi}$ but
+with anti-unitary operators it matters which state $A$ is operating on. Since
+$\Theta$ is an anti-unitary operator this inner product is equal to
+$\left(\Theta A \phi, \Theta \psi\right)$
+\begin{align*}
+    \left(\psi, A \phi\right)
+    &=
+        \left(\Theta A \phi, \Theta \psi\right) \\
+    &= \left(\Theta A \Theta^{-1} \Theta \phi, \Theta \psi\right) \\
+    &= \left(\Theta \phi, \Theta A^\dagger \Theta^{-1} \Theta \psi\right)
+        \text{ the operator } \Theta A \Theta^{-1} \text{ is linear} \\
+    &= \left(\tilde{\phi}, \Theta A^\dagger \Theta \tilde{\psi}\right)
+\end{align*}
+From classical physics we want $\left(\phi, \vec{x} \phi\right) = 
+\left(\tilde{\phi}, \vec{x} \tilde{\phi}\right)$. From the previous
+derivation we get $\left(\tilde{\phi}, \Theta \vec{x} \Theta^{-1} \tilde{\phi}\right)$
+As a whole this implies that,
+$\Theta \vec{x} \Theta^{-1} = \vec{x}$ which means the $\left[\Theta, \vec{x}\right] = 0$.
+By the same computation for momentum we must demand that
+$\left(\phi, \vec{p} \phi\right) = - \left(\tilde{\phi}, \vec{p} \tilde{\phi}\right)$
+which means that $\left\{\Theta, \vec{p}\right\} = 0$
+
+If we want these representations to commute we want $\left[T, R\right] =0$,
+where $T$ is the time reversal operator. This implies that
+$\left[\Theta, e^{- \frac{i}{\hbar} \vec{J} \cdot \hat{n} \theta}\right] = 0$
+We can then use this property to show that the time reversal operator
+we have $\left\{\Theta, \vec{J}\right\} = 0$ using the small angle approximation.
+
+\subsection{Specific Dimensions}
+We can now look at how the time reversal operator works in specific dimensions with
+some amounts of spin. In particular we can show that in 1-dim with spin-0 we get
+$\Theta \Ket{\psi} = e^{i \delta} \Ket{\psi}$ which implies that $\Theta^2 = 1$.
+which is a nice representation. However, this nice properties will not always be true.
+
+However, for spin-$1/2$ states we will end up needing to use a double cover of 
+$SO(1, 3)$. Let's work through it! Let's look at dim-2 for spin-$1/2$.
+We can start by acting on $S_z \Theta \Ket{+} = - \Theta S_z \Ket{+} = 
+- \hbar/2 \Theta \Ket{+} = -\hbar /2 \eta \Ket{-}$. In general, we can
+find $\Ket{\hat{n}, +} = e^{-\frac{i}{\hbar} S_z \alpha} e^{- \frac{i}{\hbar} S_y \beta} \Ket{+}$
+and then act on it by $\Theta$.
+\begin{align*}
+    \Theta \Ket{\hat{n}, +} = e^{- \frac{i}{\hbar} S_z \alpha} e^{- \frac{i}{\hbar} S_y \beta}
+        \Theta \Ket{+} = e^{- \frac{i}{\hbar} S_z \alpha} e^{- \frac{i}{\hbar} S_y \beta}
+        \eta \Ket{-} = \eta \Ket{\hat{n}, -}
+\end{align*}
+At the end we get the following representation for $\Theta$
+$$
+    \Theta = \eta e^{- \frac{i}{\hbar} \pi} K
+$$
+We will finish this calculation on Wednesday
+
